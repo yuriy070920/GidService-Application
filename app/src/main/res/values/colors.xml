@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
+<<<<<<< HEAD
     <color name="colorAccent">#D81B60</color>
     <color name="yelowBright">#FF9400</color>
     <color name="yellowThin">#FFDC67</color>
@@ -12,4 +13,10 @@
     <color name="darkGray">#474646</color>
     <color name="lightRed">#D45A5A</color>
     <color name="white">#FFFFFF</color>
+=======
+    <color name="brightYellow">#FF9400</color>
+    <color name="navyBlue">#191D53</color>
+    <color name="lightYellow">#FFDC67</color>
+    <color name="lightGray">#D9D9D9</color>
+>>>>>>> master
 </resources>
