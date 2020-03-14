@@ -37,7 +37,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/phoneTextField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/registration_input_filed"
@@ -54,7 +54,7 @@
         app:layout_constraintVertical_bias="0.247" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/passwordTextField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/registration_input_filed"
@@ -67,11 +67,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5"
+        app:layout_constraintTop_toBottomOf="@+id/phoneTextField"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/imageButton14"
+        android:id="@+id/firstRegPageNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/next_button"
@@ -79,7 +79,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6"
+        app:layout_constraintTop_toBottomOf="@+id/passwordTextField"
         app:layout_constraintVertical_bias="0.087"
         app:srcCompat="@drawable/next_button" />
 
@@ -92,11 +92,45 @@
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton14"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton14"
+        app:layout_constraintBottom_toBottomOf="@+id/firstRegPageNext"
+        app:layout_constraintEnd_toEndOf="@+id/firstRegPageNext"
         app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="@+id/imageButton14"
-        app:layout_constraintTop_toTopOf="@+id/imageButton14"
+        app:layout_constraintStart_toStartOf="@+id/firstRegPageNext"
+        app:layout_constraintTop_toTopOf="@+id/firstRegPageNext"
         app:layout_constraintVertical_bias="0.418" />
+
+    <ListView
+        android:layout_width="409dp"
+        android:layout_height="157dp"
+        android:layout_marginTop="76dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/firstRegPageNext" >
+
+        <ImageView
+            android:id="@+id/imageView40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/backspace_button" />
+
+        <ImageView
+            android:id="@+id/imageView41"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/backspace_button" />
+
+        <ImageView
+            android:id="@+id/imageView42"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/backspace_button" />
+
+        <ImageView
+            android:id="@+id/imageView43"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/backspace_button" />
+    </ListView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
