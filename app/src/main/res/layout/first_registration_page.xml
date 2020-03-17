@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true">
+    android:animateLayoutChanges="true"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="297dp"
         android:layout_height="111dp"
         android:fontFamily="cursive"
-        android:text="GidService"
+        android:text="@string/gidservice_Logo"
         android:textColor="@color/navyBlue"
         android:textSize="60sp"
         app:autoSizeTextType="uniform"
@@ -26,7 +27,7 @@
         android:layout_width="139dp"
         android:layout_height="36dp"
         android:fontFamily="cursive"
-        android:text="save your time"
+        android:text="@string/save_your_time"
         android:textColor="@color/navyBlue"
         android:textSize="60sp"
         app:autoSizeTextType="uniform"
@@ -42,10 +43,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/registration_input_filed"
         android:ems="10"
-        android:hint="Phone"
+        android:hint="@string/phone"
         android:inputType="phone"
-        android:paddingLeft="30dp"
-        android:paddingRight="25dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="25dp"
         android:paddingBottom="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,10 +60,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/registration_input_filed"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
-        android:paddingLeft="30dp"
-        android:paddingRight="25dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="25dp"
         android:paddingBottom="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,19 +76,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/next_button"
+        android:onClick="handleClickMain"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordTextField"
-        app:layout_constraintVertical_bias="0.087"
+        app:layout_constraintVertical_bias="0.097"
         app:srcCompat="@drawable/next_button" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="NEXT"
+        android:text="@string/next"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
@@ -98,39 +100,5 @@
         app:layout_constraintStart_toStartOf="@+id/firstRegPageNext"
         app:layout_constraintTop_toTopOf="@+id/firstRegPageNext"
         app:layout_constraintVertical_bias="0.418" />
-
-    <ListView
-        android:layout_width="409dp"
-        android:layout_height="157dp"
-        android:layout_marginTop="76dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/firstRegPageNext" >
-
-        <ImageView
-            android:id="@+id/imageView40"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/backspace_button" />
-
-        <ImageView
-            android:id="@+id/imageView41"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/backspace_button" />
-
-        <ImageView
-            android:id="@+id/imageView42"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/backspace_button" />
-
-        <ImageView
-            android:id="@+id/imageView43"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/backspace_button" />
-    </ListView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

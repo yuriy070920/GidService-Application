@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00FFFFFF"
-    tools:context=".MainActivity">
+    tools:context=".VerificationActivity">
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -16,9 +16,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.225"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/firstNumberCode"
         app:layout_constraintVertical_bias="0.314"
-        app:srcCompat="@drawable/digit_1" />
+        app:srcCompat="@drawable/digit_1"
+        android:onClick="handleClick"/>
 
     <ImageButton
         android:id="@+id/imageButton5"
@@ -31,10 +32,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton3"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/digit_6" />
+        app:srcCompat="@drawable/digit_6"
+        android:onClick="handleClick" />
 
     <ImageButton
-        android:id="@+id/imageButton10"
+        android:id="@+id/clear_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/digit_1"
@@ -56,10 +58,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton8"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/digit_0" />
+        app:srcCompat="@drawable/digit_0"
+        android:onClick="handleClick"
+        tools:ignore="OnClick" />
 
     <ImageButton
-        android:id="@+id/imageButton12"
+        android:id="@+id/erase_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/digit_1"
@@ -82,7 +86,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton5"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/digit_9" />
+        app:srcCompat="@drawable/digit_9"
+        android:onClick="handleClick" />
 
     <ImageButton
         android:id="@+id/imageButton8"
@@ -94,7 +99,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton6"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/digit_8" />
+        app:srcCompat="@drawable/digit_8"
+        android:onClick="handleClick" />
 
     <ImageButton
         android:id="@+id/imageButton7"
@@ -107,7 +113,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton4"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/digit_7" />
+        app:srcCompat="@drawable/digit_7"
+        android:onClick="handleClick" />
 
     <ImageButton
         android:id="@+id/imageButton4"
@@ -120,7 +127,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/digit_4" />
+        app:srcCompat="@drawable/digit_4"
+        android:onClick="handleClick"/>
 
     <ImageButton
         android:id="@+id/imageButton6"
@@ -132,7 +140,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton2"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/digit_5" />
+        app:srcCompat="@drawable/digit_5"
+        android:onClick="handleClick" />
 
     <ImageButton
         android:id="@+id/imageButton2"
@@ -142,9 +151,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/firstNumberCode"
         app:layout_constraintVertical_bias="0.314"
-        app:srcCompat="@drawable/digit_2" />
+        app:srcCompat="@drawable/digit_2"
+        android:onClick="handleClick" />
 
     <ImageButton
         android:id="@+id/imageButton3"
@@ -155,12 +165,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.774"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/firstNumberCode"
         app:layout_constraintVertical_bias="0.314"
-        app:srcCompat="@drawable/digit_3" />
+        app:srcCompat="@drawable/digit_3"
+        android:onClick="handleClick" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/fourthNumberCode"
         android:layout_width="48dp"
         android:layout_height="61dp"
         android:background="@drawable/verification_code_filed"
@@ -176,7 +187,7 @@
         app:layout_constraintVertical_bias="0.246" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/firstNumberCode"
         android:layout_width="48dp"
         android:layout_height="61dp"
         android:background="@drawable/verification_code_filed"
@@ -192,7 +203,7 @@
         app:layout_constraintVertical_bias="0.246" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/thirdNumberCode"
         android:layout_width="48dp"
         android:layout_height="61dp"
         android:background="@drawable/verification_code_filed"
@@ -208,7 +219,7 @@
         app:layout_constraintVertical_bias="0.246" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/secondNumberCode"
         android:layout_width="48dp"
         android:layout_height="61dp"
         android:background="@drawable/verification_code_filed"

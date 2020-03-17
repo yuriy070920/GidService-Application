@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">GidService</string>
+    <string name="next">NEXT</string>
+    <string name="password">Password</string>
+    <string name="phone">Phone</string>
+    <string name="save_your_time">save your time</string>
+    <string name="gidservice_Logo">GidService</string>
 </resources>
