@@ -11,7 +11,7 @@ public class CodeInput {
 
     protected List<EditText> textList = new ArrayList<>();
     protected int textPosition;
-    private int maxAmountDigits = 4;
+    private int maxAmountDigits;
     FinalAct finalAct;
 
     public CodeInput(List<EditText> texts, FinalAct finalAct) {
@@ -26,18 +26,20 @@ public class CodeInput {
             textPosition = 0;
         if(textPosition < maxAmountDigits) {
             textList.get(textPosition).setText(digit);
+            textList.get(textPosition).setFocusable(true);
             textPosition++;
-            if(textPosition == maxAmountDigits)
+            if(textPosition == maxAmountDigits){
                 finalAct.act();
+            }
         }
     }
 
     public void eraseDigit() {
-        if(textPosition == maxAmountDigits)
-            textPosition -= 1;
-        if(textPosition >= 0) {
-            textList.get(textPosition).setText("");
+        if(textPosition >= maxAmountDigits)
+            textPosition = maxAmountDigits - 1;
+        if(textPosition - 1 >= 0) {
             textPosition--;
+            textList.get(textPosition).setText("");
         }
     }
 

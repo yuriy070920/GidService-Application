@@ -5,4 +5,8 @@
     <string name="phone">Phone</string>
     <string name="save_your_time">save your time</string>
     <string name="gidservice_Logo">GidService</string>
+
+    <string name="title_activity_start_search_page2">start_search_page2</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

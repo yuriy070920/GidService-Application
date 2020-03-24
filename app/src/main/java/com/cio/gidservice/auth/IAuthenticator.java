@@ -5,5 +5,4 @@ public interface IAuthenticator {
      Response sendAuthRequest(User user);
      Response getSMSCode();
 
-
 }
