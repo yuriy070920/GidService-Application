@@ -1,13 +1,14 @@
 package com.cio.gidservice.network;
 
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class NetworkService {
 
-    private static NetworkService service;
     private static final String BASE_URL = "http://localhost:8080";
 
-    public static NetworkService getService() {
-        if(service == null)
-            service = new NetworkService();
-        return service;
-    }
+    Retrofit retrofit = new Retrofit.Builder()
+                                    .baseUrl(BASE_URL)
+                                    .addConverterFactory(GsonConverterFactory.create())
+                                    .build();
 }

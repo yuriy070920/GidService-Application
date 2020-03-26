@@ -2,6 +2,7 @@ package com.cio.gidservice.models;
 
 import java.time.LocalDateTime;
 
+
 public class Logs {
 
     private Long id;

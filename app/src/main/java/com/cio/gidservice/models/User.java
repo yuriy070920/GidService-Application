@@ -1,8 +1,6 @@
 package com.cio.gidservice.models;
 
 
-import android.annotation.NonNull;
-
 public class User {
     private Long id;
     private String phoneNumber;
