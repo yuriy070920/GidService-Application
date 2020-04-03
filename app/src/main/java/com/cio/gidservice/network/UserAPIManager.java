@@ -11,7 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
-public interface UserManager  {
+public interface UserAPIManager {
 
     @GET("/auth/login")
     Call<User> login(@Body Logs logs);

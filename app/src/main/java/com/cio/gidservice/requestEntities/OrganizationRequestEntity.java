@@ -1,7 +1,6 @@
 package com.cio.gidservice.requestEntities;
 
 import com.cio.gidservice.models.Organization;
-import com.cio.gidservice.models.Service;
 
 import java.util.List;
 
