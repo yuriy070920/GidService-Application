@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -86,6 +87,7 @@ public class ServiceRecyclerAdapter extends RecyclerView.Adapter<ServiceRecycler
         private TextView duration;
         private TextView price;
         private CircleImageView image;
+        private CardView cardView;
 
         private ServiceViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -95,6 +97,7 @@ public class ServiceRecyclerAdapter extends RecyclerView.Adapter<ServiceRecycler
             duration = itemView.findViewById(R.id.service_recycler_timeDuration);
             price = itemView.findViewById(R.id.service_recycler_cost);
             image = itemView.findViewById(R.id.service_recycler_image);
+            cardView = itemView.findViewById(R.id.service_cardView);
         }
     }
 }

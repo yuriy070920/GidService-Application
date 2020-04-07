@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:name=".dao.App">
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +25,8 @@
         <activity android:name=".activities.EnterNameActivity" />
         <activity android:name=".activities.OrganizationActivity"/>
         <activity android:name=".activities.ServiceActivity"/>
+        <activity android:name=".activities.AddOrganizationActivity"/>
+        <activity android:name=".activities.AddServiceActivity"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

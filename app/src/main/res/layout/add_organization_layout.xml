@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=""
+    tools:context=".activities.AddOrganizationActivity"
     android:orientation="vertical">
 
 
@@ -13,26 +13,43 @@
         android:id="@+id/textView10"
         android:layout_width="243dp"
         android:layout_height="23dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="40dp"
         android:text="Enter description"
         android:textAlignment="gravity"
         android:textColor="#000000"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/name_organization_input" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="243dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="60dp"
+        android:text="Enter URL for image"
+        android:textAlignment="gravity"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description_organization_input" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/name_organization_input"
         android:layout_width="242dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:hint="Name"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"
+        android:maxLength="35"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toBottomOf="@id/textView9" />
 
     <TextView
         android:id="@+id/textView9"
@@ -42,31 +59,50 @@
         android:text="Enter organization name"
         android:textAlignment="gravity"
         android:textColor="#000000"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText4"
-        android:layout_width="241dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="8dp"
+        android:id="@+id/description_organization_input"
+        android:layout_width="242dp"
+        android:layout_height="wrap_content"
         android:ems="10"
-        android:gravity="start|top"
+        android:gravity="center"
         android:hint="Description"
+        android:maxLength="200"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@id/textView10" />
+
+    <EditText
+        android:id="@+id/imageUrl_organization_input"
+        android:layout_width="242dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="URL"
+        android:inputType="textMultiLine"
+        android:maxLength="200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/save_organization_but"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="136dp"
+        android:layout_marginTop="88dp"
         android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.455"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.653" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

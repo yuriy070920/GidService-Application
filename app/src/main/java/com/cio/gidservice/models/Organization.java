@@ -1,15 +1,20 @@
 package com.cio.gidservice.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class Organization implements /*Parcelable*/ Serializable {
+@Entity
+public class Organization implements Serializable {
 
+    private static Long id_counter = 0L;
+
+    @PrimaryKey(autoGenerate = true)
     @SerializedName("id")
     private Long id;
     @SerializedName("name")
@@ -21,15 +26,24 @@ public class Organization implements /*Parcelable*/ Serializable {
     @SerializedName("imageUrl")
     private String imageUrl;
     @SerializedName("services")
+    @Ignore
     private List<Service> services;
 
-    public Organization(Long id, String name, String description, Float rating, List<Service> services, String imageUrl) {
+    public Organization() {
+        this(null, null, null, null, null);
+    }
+
+    public Organization(Long id, String name, String description, Float rating, String imageUrl, List<Service> services) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.rating = rating;
-        this.services = services;
         this.imageUrl = imageUrl;
+        this.services = services;
+    }
+
+    public Organization(String name, String description, Float rating, List<Service> services, String imageUrl) {
+        this(++id_counter, name, description, rating, imageUrl, services);
     }
 
     @Override

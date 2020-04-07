@@ -30,6 +30,5 @@ public class ServiceActivity extends AppCompatActivity {
                 .create();
         organization = gson.fromJson(getIntent().getStringExtra("organization"), Organization.class);
         recyclerView = findViewById(R.id.recyclerViewServices);
-        //createDataForRecycler(organization.getServices());
     }
 }
