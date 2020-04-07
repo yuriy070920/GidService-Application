@@ -1,4 +1,4 @@
-package com.cio.gidservice;
+package com.cio.gidservice.adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.cio.gidservice.R;
 
 import java.util.ArrayList;
 
@@ -70,7 +71,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             super(itemView);
             image = itemView.findViewById(R.id.image);
             name = itemView.findViewById(R.id.name);
-
         }
     }
 }

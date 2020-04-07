@@ -1,8 +1,8 @@
-package com.cio.gidservice.viewModels;
+package com.cio.gidservice.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.provider.SyncStateContract;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +12,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.cio.gidservice.R;
-import com.cio.gidservice.RecyclerViewAdapter;
+import com.cio.gidservice.activities.MainActivity;
+import com.cio.gidservice.activities.OrganizationActivity;
 import com.cio.gidservice.models.Organization;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class OrganizationCustomAdapter extends RecyclerView.Adapter<OrganizationCustomAdapter.OrganizationViewHolder> {
 
@@ -30,12 +36,14 @@ public class OrganizationCustomAdapter extends RecyclerView.Adapter<Organization
         this.organizationList = organizationList;
     }
 
-    class OrganizationViewHolder extends RecyclerView.ViewHolder{
+    class OrganizationViewHolder extends RecyclerView.ViewHolder {
+
         final View mView;
 
         private TextView name;
         private TextView description;
         private TextView rating;
+        private CircleImageView image;
 
         private OrganizationViewHolder(@NonNull View mView) {
             super(mView);
@@ -43,6 +51,7 @@ public class OrganizationCustomAdapter extends RecyclerView.Adapter<Organization
             name = mView.findViewById(R.id.name);
             description = mView.findViewById(R.id.description);
             rating = mView.findViewById(R.id.rating);
+            image = mView.findViewById(R.id.organization_image);
         }
     }
 
@@ -54,15 +63,30 @@ public class OrganizationCustomAdapter extends RecyclerView.Adapter<Organization
     }
 
 
-    @SuppressLint({"SetTextI18n", "ShowToast"})
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull OrganizationViewHolder holder, int position) {
         holder.name.setText(organizationList.get(position).getName());
         holder.description.setText(organizationList.get(position).getDescription());
-        //holder.rating.setText(organizationList.get(position).getRating().toString());
+        try{
+            holder.rating.setText(organizationList.get(position).getRating().toString());
+        }catch (NullPointerException e) {
+            holder.rating.setText("0");
+        }
         holder.description.setOnClickListener(v -> {
-            Toast.makeText(context, organizationList.get(position).getName(), Toast.LENGTH_SHORT);
+            Gson gson = new GsonBuilder()
+                    .setPrettyPrinting()
+                    .create();
+            String forSave = gson.toJson(organizationList.get(position));
+            Intent intent = new Intent(context, OrganizationActivity.class);
+            intent.putExtra("organization", forSave);
+            context.startActivity(intent);
+            Toast.makeText(context, organizationList.get(position).getName(), Toast.LENGTH_SHORT).show();
         });
+        Glide.with(context)
+                .asBitmap()
+                .load(organizationList.get(position).getImageUrl())
+                .into(holder.image);
     }
 
     @Override

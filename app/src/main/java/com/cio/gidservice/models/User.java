@@ -1,11 +1,21 @@
 package com.cio.gidservice.models;
 
 
-public class User {
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
+public class User implements Serializable {
+
+    @SerializedName("id")
     private Long id;
+    @SerializedName("phoneNumber")
     private String phoneNumber;
+    @SerializedName("login")
     private String login;
+    @SerializedName("password")
     private String password;
+    @SerializedName("name")
     private String name;
 
     public User(Long id, String phoneNumber, String login, String password, String name) {

@@ -3,6 +3,7 @@
     package="com.cio.gidservice">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -12,16 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".VerificationActivity" />
-        <activity android:name=".EnterNameActivity" />
-
+        <activity android:name=".activities.VerificationActivity" />
+        <activity android:name=".activities.EnterNameActivity" />
+        <activity android:name=".activities.OrganizationActivity"/>
+        <activity android:name=".activities.ServiceActivity"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

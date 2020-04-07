@@ -1,24 +1,22 @@
-package com.cio.gidservice;
+package com.cio.gidservice.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cio.gidservice.R;
 import com.cio.gidservice.UIServices.CodeInput;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class VerificationActivity extends AppCompatActivity {
 
-    List<EditText> codeFields = new ArrayList<>();
-    CodeInput codeInput;
+    private List<EditText> codeFields = new ArrayList<>();
+    private CodeInput codeInput;
 
     @SuppressLint("WrongViewCast")
     @Override

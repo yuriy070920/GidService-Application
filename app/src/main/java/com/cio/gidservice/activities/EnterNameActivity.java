@@ -1,8 +1,10 @@
-package com.cio.gidservice;
+package com.cio.gidservice.activities;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.cio.gidservice.R;
 
 public class EnterNameActivity extends AppCompatActivity {
 

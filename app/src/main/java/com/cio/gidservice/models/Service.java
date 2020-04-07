@@ -6,9 +6,8 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.List;
 
-public class Organization implements /*Parcelable*/ Serializable {
+public class Service implements Serializable {
 
     @SerializedName("id")
     private Long id;
@@ -16,32 +15,20 @@ public class Organization implements /*Parcelable*/ Serializable {
     private String name;
     @SerializedName("description")
     private String description;
-    @SerializedName("rating")
-    private Float rating;
+    @SerializedName("leadTime")
+    private Integer leadTime; //minutes
+    @SerializedName("price")
+    private Float price;
     @SerializedName("imageUrl")
     private String imageUrl;
-    @SerializedName("services")
-    private List<Service> services;
 
-    public Organization(Long id, String name, String description, Float rating, List<Service> services, String imageUrl) {
+    public Service(Long id, String name, String description, Integer leadTime, Float price, String imageUrl) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.rating = rating;
-        this.services = services;
+        this.leadTime = leadTime;
+        this.price = price;
         this.imageUrl = imageUrl;
-    }
-
-    @Override
-    public String toString() {
-        return "Organization{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", rating=" + rating +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", services=" + services +
-                '}';
     }
 
     public Long getId() {
@@ -68,20 +55,20 @@ public class Organization implements /*Parcelable*/ Serializable {
         this.description = description;
     }
 
-    public Float getRating() {
-        return rating;
+    public Integer getLeadTime() {
+        return leadTime;
     }
 
-    public void setRating(Float rating) {
-        this.rating = rating;
+    public void setLeadTime(Integer leadTime) {
+        this.leadTime = leadTime;
     }
 
-    public List<Service> getServices() {
-        return services;
+    public Float getPrice() {
+        return price;
     }
 
-    public void setServices(List<Service> services) {
-        this.services = services;
+    public void setPrice(Float price) {
+        this.price = price;
     }
 
     public String getImageUrl() {
@@ -90,5 +77,17 @@ public class Organization implements /*Parcelable*/ Serializable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "Service{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", leadTime=" + leadTime +
+                ", price=" + price +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
     }
 }
