@@ -1,11 +1,14 @@
 package com.cio.gidservice.UIServices;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.util.Base64;
 import android.widget.EditText;
 
-import org.w3c.dom.Text;
-
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class CodeInput {
 
@@ -50,4 +53,20 @@ public class CodeInput {
         textPosition = 0;
     }
 
+    public String toBase64(BitmapDrawable bitmapDrawable) {
+        // Получаем изображение из ImageView
+        Bitmap bitmap = bitmapDrawable.getBitmap();
+
+        // Записываем изображение в поток байтов.
+        // При этом изображение можно сжать и / или перекодировать в другой формат.
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+
+        // Получаем изображение из потока в виде байтов
+        byte[] bytes = byteArrayOutputStream.toByteArray();
+
+        // Кодируем байты в строку Base64 и возвращаем
+
+        return Base64.encodeToString(bytes, Base64.DEFAULT);
+    }
 }

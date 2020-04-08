@@ -27,6 +27,7 @@
         <activity android:name=".activities.ServiceActivity"/>
         <activity android:name=".activities.AddOrganizationActivity"/>
         <activity android:name=".activities.AddServiceActivity"/>
+        <activity android:name=".activities.ManageActivity"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

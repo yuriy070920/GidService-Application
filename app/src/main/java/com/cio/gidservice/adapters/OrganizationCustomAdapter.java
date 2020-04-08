@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.cio.gidservice.R;
-import com.cio.gidservice.activities.MainActivity;
 import com.cio.gidservice.activities.OrganizationActivity;
 import com.cio.gidservice.models.Organization;
 import com.cio.gidservice.viewController.ClickListener;
@@ -30,9 +29,9 @@ public class OrganizationCustomAdapter extends RecyclerView.Adapter<Organization
 
     private static final String TAG = "OrganizationCustomAdapter";
 
-    private List<Organization> organizationList;
-    private Context context;
-    private ClickListener clickListener;
+    protected List<Organization> organizationList;
+    protected Context context;
+    protected ClickListener clickListener;
 
     public OrganizationCustomAdapter(Context context, List<Organization> organizationList, ClickListener clickListener) {
         this.context = context;
@@ -58,6 +57,46 @@ public class OrganizationCustomAdapter extends RecyclerView.Adapter<Organization
             rating = mView.findViewById(R.id.rating);
             image = mView.findViewById(R.id.organization_image);
             cardView = mView.findViewById(R.id.organization_cardView);
+        }
+
+        public TextView getName() {
+            return name;
+        }
+
+        public void setName(TextView name) {
+            this.name = name;
+        }
+
+        public TextView getDescription() {
+            return description;
+        }
+
+        public void setDescription(TextView description) {
+            this.description = description;
+        }
+
+        public TextView getRating() {
+            return rating;
+        }
+
+        public void setRating(TextView rating) {
+            this.rating = rating;
+        }
+
+        public CircleImageView getImage() {
+            return image;
+        }
+
+        public void setImage(CircleImageView image) {
+            this.image = image;
+        }
+
+        public void setCardView(CardView cardView) {
+            this.cardView = cardView;
+        }
+
+        public CardView getCardView() {
+            return cardView;
         }
     }
 

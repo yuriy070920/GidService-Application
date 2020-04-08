@@ -1,25 +1,19 @@
 package com.cio.gidservice.activities;
 
-import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import com.cio.gidservice.R;
 import com.cio.gidservice.dao.App;
 import com.cio.gidservice.dao.AppDatabase;
 import com.cio.gidservice.dao.OrganizationDao;
 import com.cio.gidservice.models.Organization;
-import com.cio.gidservice.viewModels.OrganizationViewModel;
-
-import java.lang.ref.WeakReference;
-import java.util.List;
 
 public class AddOrganizationActivity extends AppCompatActivity {
 
@@ -32,6 +26,13 @@ public class AddOrganizationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_organization_layout);
 
+        //Setting up the button for returning to the previous layout
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //Setting header name
+        setTitle("Add organization");
+
+        //Getting fields with corresponding text
         name_et = findViewById(R.id.name_organization_input);
         description_et = findViewById(R.id.description_organization_input);
         imageUrl_et = findViewById(R.id.imageUrl_organization_input);
@@ -45,6 +46,16 @@ public class AddOrganizationActivity extends AppCompatActivity {
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private boolean save(Organization organization) {

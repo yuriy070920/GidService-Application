@@ -16,10 +16,13 @@
         android:id="@+id/appbar_organization">
 
         <ImageView
-            android:layout_width="100sp"
-            android:layout_height="100sp"
-            android:padding="1dp"
-            android:src="@drawable/picture"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="0dp"
+            android:layout_margin="0dp"
+            android:id="@+id/organization_logo_imgView"
+            android:src="@drawable/picture"
+            android:scaleType="centerCrop"/>
     </com.google.android.material.appbar.AppBarLayout>
 
     <!--Tab bar for Organization-->

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+   tools:showIn="@layout/test_layout1">
 
     <group android:checkableBehavior="single">
         <item
@@ -13,9 +13,9 @@
             android:icon="@drawable/ic_magnifier"
             android:title="Add organization" />
         <item
-            android:id="@+id/organization_manage"
+            android:id="@+id/nav_organization_manage"
             android:icon="@drawable/ic_magnifier"
-            android:title="Manage organization" />
+            android:title="Add service" />
     </group>
 
 </menu>

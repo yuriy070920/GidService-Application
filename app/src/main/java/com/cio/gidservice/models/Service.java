@@ -1,8 +1,5 @@
 package com.cio.gidservice.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -77,12 +74,7 @@ public class Service implements Serializable {
 
     @Ignore
     public Service(String name, String description, Integer leadTime, Float price, String imageUrl) {
-        this.id = id_counter++;
-        this.name = name;
-        this.description = description;
-        this.leadTime = leadTime;
-        this.price = price;
-        this.imageUrl = imageUrl;
+        this(++id_counter, name, description, leadTime, price, imageUrl, 5L);
     }
 
     public Long getId() {

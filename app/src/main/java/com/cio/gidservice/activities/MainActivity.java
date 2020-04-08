@@ -1,52 +1,45 @@
 package com.cio.gidservice.activities;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
-
 import com.cio.gidservice.R;
+import com.cio.gidservice.adapters.OrganizationCustomAdapter;
 import com.cio.gidservice.dao.App;
 import com.cio.gidservice.dao.AppDatabase;
 import com.cio.gidservice.dao.OrganizationDao;
 import com.cio.gidservice.dao.ServiceDao;
 import com.cio.gidservice.models.Organization;
-import com.cio.gidservice.models.Service;
-import com.cio.gidservice.adapters.OrganizationCustomAdapter;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.android.material.navigation.NavigationView;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.stream.Collectors;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private OrganizationCustomAdapter adapter;
     private RecyclerView recyclerView;
-    ProgressDialog progressDialog;
+    private DrawerLayout drawLay;
+    private ActionBarDrawerToggle drawTog;
+    private NavigationView navView;
+    private ProgressDialog progressDialog;
 
-    SwipeRefreshLayout refreshLayout;
+    private SwipeRefreshLayout refreshLayout;
+
 
     List<Organization> organizations = new ArrayList<>();
 
@@ -56,11 +49,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_layout1);
 
-        Intent intent = new Intent(this, AddOrganizationActivity.class);
-        startActivity(intent);
+        settingUpNavigationMenu();
 
-        //initImageBitmap();
+        settingUpRefreshLayout();
 
+    }
+
+    private void settingUpRefreshLayout() {
         refreshLayout = findViewById(R.id.refreshLayout);
         refreshLayout.setOnRefreshListener(() -> {
             try {
@@ -77,7 +72,45 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.show();
         progressDialog.dismiss();
         generateDataList(organizations);
+    }
 
+    private void settingUpNavigationMenu() {
+        drawLay = findViewById(R.id.main_layout);
+        drawTog = new ActionBarDrawerToggle(this, drawLay, R.string.Open, R.string.Close);
+        drawLay.addDrawerListener(drawTog);
+        drawTog.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupport
+        navView = findViewById(R.id.navigation_view);
+        navView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            switch(id) {
+                case R.id.nav_search:
+                    Toast.makeText(this, "Search item selected", Toast.LENGTH_SHORT).show();
+                    /*Intent intent = new Intent(this, AddOrganizationActivity.class);
+                    startActivity(intent);*/
+                    break;
+                case R.id.nav_add_organization:
+                    Toast.makeText(this, "Add organization item selected", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, AddOrganizationActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.nav_organization_manage:
+                    Toast.makeText(this, "Add service item selected", Toast.LENGTH_SHORT).show();
+                    Intent intent1 = new Intent(this, ManageActivity.class);
+                    startActivity(intent1);
+                    break;
+            }
+            return true;
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(drawTog.onOptionsItemSelected(item)){
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void generateDataList(List<Organization> dataList) {
