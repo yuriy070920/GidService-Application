@@ -35,6 +35,7 @@ public class SelectOrganizationRecyclerAdapter extends OrganizationCustomAdapter
         });
         Glide.with(context)
                 .asBitmap()
+                .fitCenter()
                 .load(organizationList.get(position).getImageUrl())
                 .placeholder(R.drawable.placeholder_image)
                 .into(holder.getImage());

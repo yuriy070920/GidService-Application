@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="brightYellow">#FF9400</color>
-    <color name="navyBlue">#191D53</color>
-    <color name="lightYellow">#FFDC67</color>
-    <color name="lightGray">#D9D9D9</color>
-    <color name="background">#F9F9F9</color>
-
-    <color name="black_overlay">#66000000</color>
+    <color name="primaryColor">#000200</color>
+    <color name="primaryLightColor">#2c2d2c</color>
+    <color name="primaryDarkColor">#000000</color>
+    <color name="secondaryColor">#f9c646</color>
+    <color name="secondaryLightColor">#fff978</color>
+    <color name="secondaryDarkColor">#c29606</color>
+    <color name="primaryTextColor">#ffffff</color>
+    <color name="secondaryTextColor">#000000</color>
+    <color name="background">#f9f9f9</color>
+    <color name="backgroundLight">#33000000</color>
 </resources>

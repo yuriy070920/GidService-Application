@@ -62,7 +62,7 @@
                 android:autoSizeTextType="uniform"
                 android:gravity="center"
                 android:text="time"
-                android:textColor="@color/navyBlue" />
+                android:textColor="@color/primaryDarkColor" />
 
             <TextView
                 android:id="@+id/simpleDurationText"
@@ -77,7 +77,7 @@
                 android:textSize="10sp"
                 android:gravity="center"
                 android:text="Duration time"
-                android:textColor="#000" />
+                android:textColor="@color/secondaryTextColor" />
 
             <TextView
                 android:id="@+id/service_recycler_description"
@@ -94,7 +94,7 @@
                 android:autoSizeTextType="uniform"
                 android:text="DescriptionDescriptionDescription"
                 android:maxLines="3"
-                android:textColor="#000" />
+                android:textColor="@color/secondaryTextColor" />
 
             <TextView
                 android:id="@+id/service_recycler_cost"
@@ -105,7 +105,7 @@
                 android:layout_marginEnd="26dp"
                 android:layout_marginBottom="14dp"
                 android:text="Cost"
-                android:textColor="@color/brightYellow" />
+                android:textColor="@color/secondaryDarkColor" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

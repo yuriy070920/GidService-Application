@@ -15,6 +15,9 @@
         android:usesCleartextTraffic="true"
         android:name=".dao.App">
         <activity android:name=".activities.MainActivity">
+
+        </activity>
+        <activity android:name=".activities.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

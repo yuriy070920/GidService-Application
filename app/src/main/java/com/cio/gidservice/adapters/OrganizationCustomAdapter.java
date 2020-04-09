@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,8 +23,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class OrganizationCustomAdapter extends RecyclerView.Adapter<OrganizationCustomAdapter.OrganizationViewHolder> {
 
@@ -46,7 +45,7 @@ public class OrganizationCustomAdapter extends RecyclerView.Adapter<Organization
         private TextView name;
         private TextView description;
         private TextView rating;
-        private CircleImageView image;
+        private ImageView image;
         private CardView cardView;
 
         private OrganizationViewHolder(@NonNull View mView) {
@@ -83,11 +82,11 @@ public class OrganizationCustomAdapter extends RecyclerView.Adapter<Organization
             this.rating = rating;
         }
 
-        public CircleImageView getImage() {
+        public ImageView getImage() {
             return image;
         }
 
-        public void setImage(CircleImageView image) {
+        public void setImage(ImageView image) {
             this.image = image;
         }
 
@@ -131,6 +130,7 @@ public class OrganizationCustomAdapter extends RecyclerView.Adapter<Organization
         });
         Glide.with(context)
                 .asBitmap()
+                .fitCenter()
                 .load(organizationList.get(position).getImageUrl())
                 .placeholder(R.drawable.placeholder_image)
                 .into(holder.image);
