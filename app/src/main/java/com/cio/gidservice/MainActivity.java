@@ -1,24 +1,30 @@
 package com.cio.gidservice;
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-
 import java.util.ArrayList;
-import java.util.List;
+
+import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
+    private static final int MY_PERMISSIONS_REQUEST = 100;
+
+    private int PICK_IMAGE_FROM_GALLERY_REQUEST = 1;
 
     //vars
     private ArrayList<String> mNames = new ArrayList<>();
@@ -30,21 +36,48 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_layout1);
 
-        initImageBitmap();
-        /*final EditText phone = findViewById(R.id.phoneTextField);
-        final EditText pass = findViewById(R.id.passwordTextField);*/
+        Button button = findViewById(R.id.open_media);
+        button.setOnClickListener(view -> {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+            startActivityForResult(Intent.createChooser(intent, "Select picture"), PICK_IMAGE_FROM_GALLERY_REQUEST);
+        });
 
+        initImageBitmap();
     }
 
-    /*public void handleClickMain(View view) {
-        final EditText phone = findViewById(R.id.phoneTextField);
-        final EditText pass = findViewById(R.id.passwordTextField);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        if(phone.getText().toString().equals("+380931262912") && pass.getText().toString().equals("123456")){
-            Intent intent = new Intent(this, VerificationActivity.class);
-            startActivity(intent);
+        if(requestCode == PICK_IMAGE_FROM_GALLERY_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri uri = data.getData();
+            uploadFile(uri);
         }
-    }*/
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                } else {
+
+                }
+                return;
+            }
+        }
+    }
+
+    private void uploadFile(Uri uri) {
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .base
+    }
 
     private void initImageBitmap() {
         Log.d(TAG, "initImageBitmap: preparing bitmaps.");
