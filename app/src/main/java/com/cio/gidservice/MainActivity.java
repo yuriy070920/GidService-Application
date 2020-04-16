@@ -1,22 +1,36 @@
 package com.cio.gidservice;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import com.cio.gidservice.network.NetworkService;
+import com.cio.gidservice.network.UserManager;
+import com.cio.gidservice.utils.FileUtils;
+
+import java.io.File;
 import java.util.ArrayList;
 
+import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,7 +59,26 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(Intent.createChooser(intent, "Select picture"), PICK_IMAGE_FROM_GALLERY_REQUEST);
         });
 
-        initImageBitmap();
+        //initImageBitmap();
+    }
+
+    private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
+
+    /**
+     * requestPermissions and do something
+     *
+     */
+    public void requestRead(Uri uri) {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+        } else {
+            uploadFile(uri);
+        }
     }
 
     @Override
@@ -54,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(requestCode == PICK_IMAGE_FROM_GALLERY_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri uri = data.getData();
-            uploadFile(uri);
+            requestRead(uri);
         }
     }
 
@@ -75,11 +108,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void uploadFile(Uri uri) {
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .base
+        Retrofit retrofit = NetworkService.getRetrofitInstance();
+
+        File originalFile = FileUtils.getFile(this, uri);
+        RequestBody filePart = FormBody.create(
+                MediaType.parse(getContentResolver().getType(uri)),
+                originalFile
+        );
+
+        MultipartBody.Part file = MultipartBody.Part.createFormData("photo", originalFile.getName(), filePart);
+
+
+        UserManager userManager = retrofit.create(UserManager.class);
+
+        Call<ResponseBody> call = userManager.uploadImage(file);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Toast.makeText(MainActivity.this, "Ohh, you upload your image to the server!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(MainActivity.this, "Oops :( Something went wrong.", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
-    private void initImageBitmap() {
+    /*private void initImageBitmap() {
         Log.d(TAG, "initImageBitmap: preparing bitmaps.");
 
         mImagesUrl.add("https://images.unsplash.com/photo-1441786485319-5e0f0c092803?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
@@ -123,5 +180,5 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         RecyclerViewAdapter viewAdapter = new RecyclerViewAdapter(this, mNames, mImagesUrl);
         recyclerView.setAdapter(viewAdapter);
-    }
+    }*/
 }
