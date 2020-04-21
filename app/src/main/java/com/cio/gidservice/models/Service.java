@@ -22,8 +22,6 @@ public class Service implements Serializable {
     private String name;
     @SerializedName("description")
     private String description;
-    @SerializedName("leadTime")
-    private Integer leadTime; //minutes
     @SerializedName("price")
     private Float price;
     @SerializedName("imageUrl")
@@ -42,39 +40,36 @@ public class Service implements Serializable {
     public Service() {
     }
 
-    public Service(Long id, String name, String description, Integer leadTime, Float price, String imageUrl, Long id_organization) {
+    public Service(Long id, String name, String description, Float price, String imageUrl, Long id_organization) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.leadTime = leadTime;
         this.price = price;
         this.imageUrl = imageUrl;
         this.id_organization = id_organization;
     }
 
     @Ignore
-    public Service(String name, String description, Integer leadTime, Float price, String imageUrl, Long id_organization) {
+    public Service(String name, String description, Float price, String imageUrl, Long id_organization) {
         this.name = name;
         this.description = description;
-        this.leadTime = leadTime;
         this.price = price;
         this.imageUrl = imageUrl;
         this.id_organization = id_organization;
     }
 
     @Ignore
-    public Service(Long id, String name, String description, Integer leadTime, Float price, String imageUrl) {
+    public Service(Long id, String name, String description, Float price, String imageUrl) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.leadTime = leadTime;
         this.price = price;
         this.imageUrl = imageUrl;
     }
 
     @Ignore
-    public Service(String name, String description, Integer leadTime, Float price, String imageUrl) {
-        this(++id_counter, name, description, leadTime, price, imageUrl, 5L);
+    public Service(String name, String description, Float price, String imageUrl) {
+        this(++id_counter, name, description, price, imageUrl, 5L);
     }
 
     public Long getId() {
@@ -101,14 +96,6 @@ public class Service implements Serializable {
         this.description = description;
     }
 
-    public Integer getLeadTime() {
-        return leadTime;
-    }
-
-    public void setLeadTime(Integer leadTime) {
-        this.leadTime = leadTime;
-    }
-
     public Float getPrice() {
         return price;
     }
@@ -131,7 +118,6 @@ public class Service implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", leadTime=" + leadTime +
                 ", price=" + price +
                 ", imageUrl='" + imageUrl + '\'' +
                 '}';

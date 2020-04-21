@@ -25,4 +25,7 @@ public interface OrganizationDao {
     @Delete
     void delete(Organization organization);
 
+    @Query("DELETE FROM organization")
+    void clear();
+
 }

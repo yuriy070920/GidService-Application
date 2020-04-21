@@ -1,7 +1,6 @@
 package com.cio.gidservice.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,10 +53,8 @@ public class ServiceRecyclerAdapter extends RecyclerView.Adapter<ServiceRecycler
      */
     @Override
     public void onBindViewHolder(@NonNull ServiceViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: " + holder.duration);
         holder.name.setText(serviceList.get(position).getName());
         holder.description.setText(serviceList.get(position).getDescription());
-        holder.duration.setText(String.valueOf(serviceList.get(position).getLeadTime()));
         holder.price.setText(String.valueOf(serviceList.get(position).getPrice()));
         Glide.with(mContext)
                 .asBitmap()
@@ -84,7 +81,6 @@ public class ServiceRecyclerAdapter extends RecyclerView.Adapter<ServiceRecycler
 
         private TextView name;
         private TextView description;
-        private TextView duration;
         private TextView price;
         private CircleImageView image;
         private CardView cardView;
@@ -94,7 +90,6 @@ public class ServiceRecyclerAdapter extends RecyclerView.Adapter<ServiceRecycler
             this.view = itemView;
             name = itemView.findViewById(R.id.service_recycler_name);
             description = itemView.findViewById(R.id.service_recycler_description);
-            duration = itemView.findViewById(R.id.service_recycler_timeDuration);
             price = itemView.findViewById(R.id.service_recycler_cost);
             image = itemView.findViewById(R.id.service_recycler_image);
             cardView = itemView.findViewById(R.id.service_cardView);

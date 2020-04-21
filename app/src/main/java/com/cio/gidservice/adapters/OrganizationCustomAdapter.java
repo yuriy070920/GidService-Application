@@ -125,7 +125,7 @@ public class OrganizationCustomAdapter extends RecyclerView.Adapter<Organization
             String forSave = gson.toJson(organizationList.get(position));
             Intent intent = new Intent(context, OrganizationActivity.class);
             intent.putExtra("organization", forSave);
-            context.startActivity(intent);
+            holder.mView.getContext().startActivity(intent);
             Toast.makeText(context, organizationList.get(position).getName(), Toast.LENGTH_SHORT).show();
         });
         Glide.with(context)

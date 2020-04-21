@@ -11,6 +11,6 @@ public class UserViewModel {
     }
 
     public UserViewModel(Long id, String phoneNumber, String login, String password, String name) {
-        user = new User(id, phoneNumber, login, password, name);
+        user = new User(phoneNumber, login, password, name);
     }
 }

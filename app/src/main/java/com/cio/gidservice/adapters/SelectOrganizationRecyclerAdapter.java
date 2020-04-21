@@ -31,7 +31,8 @@ public class SelectOrganizationRecyclerAdapter extends OrganizationCustomAdapter
         holder.getCardView().setOnClickListener(v -> {
             Intent intent = new Intent(super.context, AddServiceActivity.class)
                     .putExtra("organization_id", organizationList.get(position).getId());
-            context.startActivity(intent);
+            System.out.println(organizationList.get(position).getId());
+            holder.mView.getContext().startActivity(intent);
         });
         Glide.with(context)
                 .asBitmap()

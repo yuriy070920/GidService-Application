@@ -1,0 +1,118 @@
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activities.AddOrganizationActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="35sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cardCornerRadius="15sp"
+        app:cardMaxElevation="4dp"
+        app:cardElevation="2dp">
+        <ImageView
+            android:id="@+id/imageLoadButton"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_height="match_parent"
+            android:src="@drawable/photo_picker"
+            android:scaleType="centerCrop"
+            android:backgroundTintMode="add"
+            android:onClick="loadImageInto"/>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="243dp"
+        android:layout_height="23dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="25sp"
+        android:fontFamily="@font/ubuntu_light"
+        android:text="Enter organization name"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/name_organization_input"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:background="@drawable/registration_input_filed"
+        android:fontFamily="@font/ubuntu_light"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:hint="Name"
+        android:inputType="textMultiLine"
+        android:maxLines="1"/>
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="243dp"
+        android:layout_height="23dp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/ubuntu_light"
+        android:gravity="center"
+        android:text="Enter description"
+        android:layout_marginTop="25sp"
+        android:textAlignment="gravity"
+        android:textColor="#000000"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/description_organization_input"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView10"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center"
+        android:background="@drawable/description_field"
+        android:gravity="center_horizontal"
+        android:hint="Description"
+        android:inputType="textMultiLine"
+        android:maxLines="4"
+        android:padding="10sp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="25sp">
+
+        <ImageButton
+            android:id="@+id/firstRegPageNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/next_page_button"
+            android:paddingBottom="5sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            tools:visibility="visible"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ubuntu_light"
+            android:text="Next"
+            android:textColor="@color/secondaryTextColor"
+            android:textFontWeight="700"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/firstRegPageNext"
+            app:layout_constraintEnd_toEndOf="@id/firstRegPageNext"
+            app:layout_constraintStart_toStartOf="@id/firstRegPageNext"
+            app:layout_constraintTop_toTopOf="@id/firstRegPageNext"
+            app:layout_constraintVertical_bias="0.382" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

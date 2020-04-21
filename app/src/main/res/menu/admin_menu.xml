@@ -16,6 +16,10 @@
             android:id="@+id/nav_organization_manage"
             android:icon="@drawable/ic_magnifier"
             android:title="Add service" />
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/microphone_icon"
+            android:title="Logout"/>
     </group>
 
 </menu>

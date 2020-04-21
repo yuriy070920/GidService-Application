@@ -2,13 +2,18 @@ package com.cio.gidservice.network;
 
 import com.cio.gidservice.models.Organization;
 import com.cio.gidservice.models.Service;
-import com.cio.gidservice.requestEntities.OrganizationRequestEntity;
-import com.cio.gidservice.requestEntities.ServiceRequestEntity;
 
 import java.util.List;
 
-import retrofit2.*;
-import retrofit2.http.*;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 
 public interface OrganizationAPIManager {
@@ -19,13 +24,26 @@ public interface OrganizationAPIManager {
     @GET("/organization/{user_id}/get-all")
     Call<List<Organization>> getOrganizationList(@Path("user_id") Long id);
 
+    @Multipart
     @POST("/organization/{user_id}/add")
-    Call<List<Organization>> addOrganization(@Path("user_id") Long id, @Body OrganizationRequestEntity entity);
+    Call<List<Organization>> addOrganization(
+            @Path("user_id") Long id,
+            @Part MultipartBody.Part photo,
+            @Part("name") RequestBody name,
+            @Part("description") RequestBody description
+    );
 
-    @POST("/organization/{user_id}/addService")
-    Call<Long> addService(@Path("user_id") Long user_id, @Body ServiceRequestEntity entity);
+    @Multipart
+    @POST("/organization/{id_org}/addService")
+    Call<Long> addService(
+            @Path("id_org") Long id_org,
+            @Part MultipartBody.Part photo,
+            @Part("name") RequestBody name,
+            @Part("description") RequestBody description,
+            @Part("cost") RequestBody cost
+    );
 
-    @GET("/organization/{user_id}/getServices")
-    Call<List<Service>> getServices(@Path("user_id") String userID, @Query("org_id") Long orgID);
+    @GET("/organization/getServices")
+    Call<List<Service>> getServices(@Query("org_id") Long orgID);
 
 }

@@ -7,7 +7,7 @@ public class UserRequestEntity extends User {
     private String ip;
 
     public UserRequestEntity(Long id, String phoneNumber, String login, String password, String name) {
-        super(id, phoneNumber, login, password, name);
+        super(phoneNumber, login, password, name);
     }
 
     public String getIp() {

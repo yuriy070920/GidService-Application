@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.AddServiceActivity">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/add_service_swipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="25sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:cardCornerRadius="15sp"
+                app:cardMaxElevation="4dp"
+                app:cardElevation="2dp">
+                <ImageView
+                    android:id="@+id/service_image_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/photo_picker"
+                    android:scaleType="centerCrop"/>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_marginTop="15sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:autoSizeMaxTextSize="20sp"
+                android:autoSizeMinTextSize="15sp"
+                android:gravity="center_horizontal"
+                android:text="Enter service name"
+                android:textColor="#0f0f0f"
+                android:textSize="20sp"
+                android:fontFamily="@font/ubuntu_light"/>
+
+            <EditText
+                android:id="@+id/service_name_input"
+                android:layout_width="214dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:hint="Service name"
+                android:maxWidth="250sp"
+                android:maxLines="4"
+                android:layout_marginTop="-5sp"
+                android:background="@drawable/registration_input_filed"/>
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_marginTop="15sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:autoSizeMaxTextSize="20sp"
+                android:autoSizeMinTextSize="15sp"
+                android:gravity="center_horizontal"
+                android:text="Enter description"
+                android:textColor="#0f0f0f"
+                android:textSize="20sp"
+                android:fontFamily="@font/ubuntu_light"/>
+
+            <EditText
+                android:id="@+id/service_description_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:padding="15sp"
+                android:hint="Service description"
+                android:layout_marginTop="-5sp"
+                android:maxWidth="250sp"
+                android:maxLines="4"
+                android:autoSizeMaxTextSize="20sp"
+                android:background="@drawable/description_field"/>
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_marginTop="15sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:autoSizeMaxTextSize="20sp"
+                android:autoSizeMinTextSize="15sp"
+                android:gravity="center_horizontal"
+                android:text="Enter cost"
+                android:fontFamily="@font/ubuntu_light"
+                android:textColor="#0f0f0f"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/service_cost_input"
+                android:layout_width="150sp"
+                android:layout_height="50sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="-5sp"
+                android:hint="Cost"
+                android:inputType="numberDecimal"
+                android:background="@drawable/registration_input_filed"/>
+
+            <ImageButton
+                android:id="@+id/save_service_but"
+                android:layout_marginTop="5sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/finish_button"/>
+        </LinearLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</LinearLayout>

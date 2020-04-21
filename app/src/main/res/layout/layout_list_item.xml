@@ -14,7 +14,6 @@
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="250dp"
-        app:cardCornerRadius="20dp"
         app:cardMaxElevation="4dp"
         app:cardElevation="2dp"
         android:layout_centerInParent="true"
@@ -37,15 +36,13 @@
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="0dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background"></ImageView>
+                android:src="@drawable/ic_launcher_background"/>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentBottom="true"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="#00000000"
-                android:background="@drawable/shadow_background">
+                app:cardBackgroundColor="#00000000">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -55,8 +52,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/shadow_background"/>
+                        android:background="@drawable/backgroung_shape"/>
 
                     <TextView
                         android:id="@+id/name"

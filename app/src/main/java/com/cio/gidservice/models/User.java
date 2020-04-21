@@ -1,12 +1,17 @@
 package com.cio.gidservice.models;
 
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+@Entity
 public class User implements Serializable {
 
+    @PrimaryKey(autoGenerate = true)
     @SerializedName("id")
     private Long id;
     @SerializedName("phoneNumber")
@@ -18,8 +23,11 @@ public class User implements Serializable {
     @SerializedName("name")
     private String name;
 
-    public User(Long id, String phoneNumber, String login, String password, String name) {
-        this.id = id;
+    public User() {
+    }
+
+    public User(String phoneNumber, String login, String password, String name) {
+        //this.id = id;
         this.phoneNumber = phoneNumber;
         this.login = login;
         this.password = password;
