@@ -21,6 +21,13 @@
             android:orientation="vertical">
         </androidx.recyclerview.widget.RecyclerView>
 
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/khula_light"
+            android:text="TextView" />
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.navigation.NavigationView

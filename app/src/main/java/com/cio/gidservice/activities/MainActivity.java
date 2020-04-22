@@ -1,5 +1,6 @@
 package com.cio.gidservice.activities;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -59,12 +61,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_layout1);
 
+        checkPermossions();;
+
         ((SwipeRefreshLayout)findViewById(R.id.refreshLayout)).setRefreshing(true);
 
         settingUpNavigationMenu();
 
         settingUpRefreshLayout();
 
+    }
+
+    private void checkPermossions() {
+        ActivityCompat.requestPermissions(MainActivity.this,
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
     }
 
     private void settingUpRefreshLayout() {
@@ -88,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
         drawLay.addDrawerListener(drawTog);
         drawTog.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.menu_icon);
         //getSupport
         navView = findViewById(R.id.navigation_view);
         System.out.println(UserProperties.isAdmin());
@@ -100,19 +111,14 @@ public class MainActivity extends AppCompatActivity {
             int id = item.getItemId();
             switch(id) {
                 case R.id.nav_search:
-                    Toast.makeText(this, "Search item selected", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show();
                     /*Intent intent = new Intent(this, AddOrganizationActivity.class);
                     startActivity(intent);*/
                     break;
-                case R.id.nav_add_organization:
-                    Toast.makeText(this, "Add organization item selected", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(this, AddOrganizationActivity.class);
+                case R.id.nav_management:
+                    Toast.makeText(this, "Management", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, ManagementActivity.class);
                     startActivity(intent);
-                    break;
-                case R.id.nav_organization_manage:
-                    Toast.makeText(this, "Add service item selected", Toast.LENGTH_SHORT).show();
-                    Intent intent1 = new Intent(this, ManageActivity.class);
-                    startActivity(intent1);
                     break;
                 case R.id.login_admin:
                     Toast.makeText(this, "Login", Toast.LENGTH_SHORT).show();

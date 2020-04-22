@@ -1,0 +1,12 @@
+com.cio.gidservice
+com.cio.gidservice.UIServices
+com.cio.gidservice.activities
+com.cio.gidservice.adapters
+com.cio.gidservice.dao
+com.cio.gidservice.fragments
+com.cio.gidservice.models
+com.cio.gidservice.network
+com.cio.gidservice.requestEntities
+com.cio.gidservice.utils
+com.cio.gidservice.viewController
+com.cio.gidservice.viewModels

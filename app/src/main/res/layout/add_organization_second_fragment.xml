@@ -1,42 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.AddOrganizationActivity"
-    android:orientation="vertical">
+    tools:context=".activities.AddOrganizationActivity">
 
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/ubuntu_light"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="Choose location"
-        android:layout_marginTop="30sp"
-        android:layout_gravity="center"/>
-
-    <RelativeLayout
-        android:id="@+id/mapSelect"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="500sp"
-        android:layout_marginTop="50sp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <ImageButton
-        android:id="@+id/finish_button"
-        android:layout_margin="10sp"
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30sp"
+            android:fontFamily="@font/ubuntu_light"
+            android:text="Choose location"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="50sp"
+            android:layout_gravity="center"
+            android:background="@drawable/search_location_field"
+            android:fontFamily="@font/gilroy_light"
+            android:hint="@string/enter_address"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:paddingStart="50sp"
+            android:paddingEnd="30sp"
+            android:textSize="18sp"/>
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="400sp"
+            android:layout_marginTop="30sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/finish_button" />
-    <ImageView
-        android:layout_width="30sp"
-        android:layout_height="8sp"
-        android:background="@drawable/list_items_circules"
-        android:layout_margin="15sp"
-        android:layout_gravity="center"
-        android:rotation="180"/>
+        android:gravity="bottom"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-</LinearLayout>
+        <ImageButton
+            android:id="@+id/finish_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/finish_button" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

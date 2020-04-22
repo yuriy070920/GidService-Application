@@ -1,6 +1,8 @@
 package com.cio.gidservice.fragments;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -48,6 +50,7 @@ public class FirstAddServiceFragment extends Fragment {
     private EditText description_et;
     private EditText cost_et;
     private Service service;
+    private SwipeRefreshLayout refreshLayout;
 
     public FirstAddServiceFragment() {
         service = new Service();
@@ -77,8 +80,6 @@ public class FirstAddServiceFragment extends Fragment {
                 ActivityCompat.requestPermissions(getActivity(),
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
-            }
-            else {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -87,11 +88,18 @@ public class FirstAddServiceFragment extends Fragment {
                         PICK_IMAGE_FROM_GALLERY_REQUEST
                 );
             }
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(
+                    Intent.createChooser(intent, "Select picture.."),
+                    PICK_IMAGE_FROM_GALLERY_REQUEST
+            );
         });
 
         ImageButton save = view.findViewById(R.id.save_service_but);
         save.setOnClickListener(v -> {
-
+            startUpload();
         });
     }
 
@@ -116,15 +124,49 @@ public class FirstAddServiceFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    private void checkPermissions() {
+        ActivityCompat.requestPermissions(getActivity(),
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Intent intent = new Intent();
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(
+                            Intent.createChooser(intent, "Select picture.."),
+                            PICK_IMAGE_FROM_GALLERY_REQUEST
+                    );
+                }
+                break;
+            }
+        }
+    }
+
     private void startUpload() {
 
-        SwipeRefreshLayout refreshLayout = view.findViewById(R.id.add_service_swipe);
-        refreshLayout.setRefreshing(true);
+        ProgressDialog dialog = ProgressDialog.show(getContext(), "", "Uploading\nPlease wait...", true);
         Long orgId = getActivity().getIntent().getLongExtra("organization_id", 1);
+
+        if(name_et.getText() == null ||
+                description_et.getText() == null ||
+                cost_et.getText() == null) {
+
+            return;
+        }
+
         service.setName(name_et.getText().toString());
         service.setDescription(description_et.getText().toString());
         service.setPrice(Float.valueOf(cost_et.getText().toString()));
         service.setId_organization(orgId);
+
+
         OrganizationAPIManager apiManager = RetrofitClientInstance.getRetrofitInstance().create(OrganizationAPIManager.class);
 
         RequestBody name = RequestBody.create(MultipartBody.FORM, service.getName());
@@ -155,5 +197,9 @@ public class FirstAddServiceFragment extends Fragment {
                 refreshLayout.setRefreshing(false);
             }
         });
+    }
+
+    private void finishUpload(AlertDialog dialog) {
+        dialog.dismiss();
     }
 }

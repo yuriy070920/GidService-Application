@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="15sp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/add_organization_manage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/img_btn_add_company"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60sp"
+                android:fontFamily="@font/gilroy_light"
+                android:textColor="@color/secondaryTextColor"
+                android:gravity="center"
+                android:text="@string/add_organization"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/add_organization_manage"
+                app:layout_constraintEnd_toEndOf="@+id/add_organization_manage"
+                app:layout_constraintStart_toStartOf="@+id/add_organization_manage"
+                app:layout_constraintTop_toTopOf="@+id/add_organization_manage" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15sp"
+            android:layout_gravity="bottom">
+
+            <ImageButton
+                android:id="@+id/add_service_manage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/img_btn_add_service"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:text="@string/add_service"
+                android:layout_marginTop="35sp"
+                android:textSize="18sp"
+                android:fontFamily="@font/gilroy_light"
+                android:textColor="@color/secondaryTextColor"
+                android:gravity="bottom"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/add_service_manage"
+                app:layout_constraintStart_toStartOf="@+id/add_service_manage"
+                app:layout_constraintTop_toTopOf="@+id/add_service_manage"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:visibility="invisible">
+        
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/view_organizations_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/img_btn_view_companies"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/view_organizations_btn"
+                android:layout_alignEnd="@id/view_organizations_btn"
+                android:layout_alignBottom="@+id/view_organizations_btn"
+                android:layout_marginBottom="20sp"
+                android:fontFamily="@font/gilroy_light"
+                android:text="@string/view_organizations"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:textColor="@color/secondaryTextColor" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15sp">
+
+            <ImageButton
+                android:id="@+id/view_services_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/img_btn_view_services"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/view_all_services"
+                android:textAlignment="center"
+                android:textColor="@color/secondaryTextColor"
+                android:fontFamily="@font/gilroy_light"
+                android:textSize="18sp"
+                android:layout_alignBottom="@id/view_services_btn"
+                android:layout_alignEnd="@id/view_services_btn"
+                android:layout_alignStart="@id/view_services_btn"
+                android:layout_marginBottom="20sp"/>
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/another_opportunities"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/wide__white_button"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Request other features"
+            android:textAlignment="center"
+            android:textColor="@color/secondaryColor"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_margin="20sp"
+            android:fontFamily="@font/gilroy_extrabold"
+            android:layout_alignBottom="@id/another_opportunities"
+            android:layout_alignStart="@id/another_opportunities"
+            android:layout_alignEnd="@id/another_opportunities"
+            android:layout_alignTop="@id/another_opportunities"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

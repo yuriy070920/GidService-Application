@@ -32,6 +32,7 @@ import static com.cio.gidservice.activities.AddOrganizationActivity.MY_PERMISSIO
 public class FirstAddOrganizationFragment extends Fragment {
 
     private static final int PICK_IMAGE_FROM_GALLERY_REQUEST = 1;
+    private static final int MY_PERMISSIONS_REQUEST = 100;
     private View view;
     ImageView imageLoader;
 
@@ -82,6 +83,23 @@ public class FirstAddOrganizationFragment extends Fragment {
                 Toast.makeText(getContext(), "Not all fields are filled", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_PERMISSIONS_REQUEST) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(
+                        Intent.createChooser(intent, "Select picture.."),
+                        PICK_IMAGE_FROM_GALLERY_REQUEST
+                );
+            }
+        }
     }
 
     private boolean setOrganization() {
