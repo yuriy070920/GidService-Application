@@ -1,17 +1,40 @@
 package com.cio.gidservice.dialogs;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
-import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
+import com.cio.gidservice.R;
 
-public class UploadingDialog extends DialogFragment {
+public class UploadingDialog extends Dialog {
 
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        return super.onCreateDialog(savedInstanceState);
+    Activity activity;
+    AlertDialog dialog;
+
+    public UploadingDialog(Activity activity) {
+        super(activity);
+        this.activity = activity;
+    }
+
+    public void startLoading() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
+        LayoutInflater inflater = activity.getLayoutInflater();
+        builder.setView(inflater.inflate(R.layout.custom_progress, null));
+        builder.setCancelable(false);
+
+        dialog = builder.create();
+        dialog.show();
+    }
+    public void startLoading(String text) {
+        TextView view = findViewById(R.id.progress_message);
+        view.setText(text);
+        startLoading();
+    }
+
+    public void dismiss() {
+        dialog.dismiss();
     }
 }

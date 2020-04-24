@@ -63,8 +63,7 @@ public class AddOrganizationActivity extends AppCompatActivity implements OnMapR
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.add_organization_frame, new FirstAddOrganizationFragment(this, organization)).commit();
 
-
-
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         //Setting header name
         setTitle("Add organization 1/2");
     }

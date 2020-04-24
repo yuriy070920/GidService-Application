@@ -17,7 +17,7 @@ import retrofit2.http.Query;
 public interface UserAPIManager {
 
     @POST("/auth/login")
-    Call<ResponseBody> login(@Body User User);
+    Call<Long> login(@Body User User);
 
     @POST("/auth/register")
     Call<ResponseBody> register(@Body UserRequestEntity entity);

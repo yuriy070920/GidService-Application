@@ -6,8 +6,9 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_search"
-            android:icon="@drawable/ic_magnifying_glass"
-            android:title="Search" />
+            android:icon="@drawable/ic_magnifier"
+            android:title="Search"
+            />
         <item
             android:id="@+id/nav_management"
             android:icon="@drawable/ic_management"

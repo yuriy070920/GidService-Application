@@ -2,8 +2,10 @@ package com.cio.gidservice.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ImageButton;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +23,9 @@ public class ManagementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.management_layout);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("Management");
+
         addOrganization = findViewById(R.id.add_organization_manage);
         addOrganization.setOnClickListener(v -> {
             Intent intent = new Intent(this, AddOrganizationActivity.class);
@@ -32,5 +37,15 @@ public class ManagementActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ManageActivity.class);
             startActivity(intent);
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

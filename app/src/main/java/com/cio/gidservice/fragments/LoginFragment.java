@@ -22,9 +22,6 @@ import com.cio.gidservice.models.UserProperties;
 import com.cio.gidservice.network.RetrofitClientInstance;
 import com.cio.gidservice.network.UserAPIManager;
 
-import java.io.IOException;
-
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -65,19 +62,16 @@ public class LoginFragment extends Fragment {
 
         User user = new User("", login, pass, "Admin");
 
-        apiManager.login(user).enqueue(new Callback<ResponseBody>() {
+        apiManager.login(user).enqueue(new Callback<Long>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<Long> call, Response<Long> response) {
                 if(response.isSuccessful()) {
                     UserDao db = App.getInstance().getDatabase().userDao();
-                    try {
-                        assert response.body() != null;
-                        user.setId(Long.valueOf(response.body().string()));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    assert response.body() != null;
+                    user.setId(response.body());
                     db.addUser(user);
                     UserProperties.setIsAdmin(true);
+                    UserProperties.getUser().setId(db.getUser().getId());
                     Intent intent = new Intent(getContext(), MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
@@ -89,7 +83,7 @@ public class LoginFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<Long> call, Throwable t) {
                 Toast.makeText(getContext(), "Check your internet connection and try later!", Toast.LENGTH_LONG).show();
             }
         });
@@ -103,9 +97,9 @@ public class LoginFragment extends Fragment {
  *      a) добавить агрумент MultipartData.
  *      b) сделать запрос и предусмотреть исключения
  *  3. Начать делать работу с картой:
- *      a) сделать вывод карты на экран
- *      b) сделать перемещение курсора
- *      c) сделать подтверждение метки
+ *      a) сделать вывод карты на экран(done)
+ *      b) сделать перемещение курсора(done)
+ *      c) сделать подтверждение метки(done)
  *      d) сделать поиск места на карте
  *      f) сделать добавление места для организации
  */

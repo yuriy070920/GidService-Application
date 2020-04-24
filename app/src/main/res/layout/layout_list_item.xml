@@ -16,6 +16,10 @@
         android:layout_height="250dp"
         app:cardMaxElevation="4dp"
         app:cardElevation="2dp"
+        app:cardCornerRadius="15sp"
+        android:layout_marginTop="15sp"
+        android:layout_marginBottom="15sp"
+        android:layout_marginStart="50sp"
         android:layout_centerInParent="true"
         android:id="@+id/organization_cardView">
 
@@ -42,7 +46,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="#00000000">
+                app:cardBackgroundColor="#00000000"
+                app:cardCornerRadius="15sp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -52,7 +57,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/backgroung_shape"/>
+                        android:background="@drawable/backgroung_shape" />
 
                     <TextView
                         android:id="@+id/name"
@@ -66,7 +71,8 @@
                         android:paddingLeft="25dp"
                         android:paddingRight="25dp"
                         android:text="Name"
-                        android:textColor="@color/primaryTextColor" />
+                        android:textColor="@color/primaryTextColor"
+                        android:fontFamily="@font/segoeui_bold"/>
 
                     <TextView
                         android:id="@+id/description"
@@ -77,6 +83,8 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginStart="0dp"
                         android:layout_marginEnd="109dp"
+                        android:layout_marginBottom="1dp"
+                        android:fontFamily="@font/segoeui_semibold"
                         android:gravity="clip_horizontal"
                         android:maxWidth="300sp"
                         android:maxLines="3"

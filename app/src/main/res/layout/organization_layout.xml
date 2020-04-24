@@ -33,15 +33,15 @@
         app:tabGravity="fill"
         app:tabMode="fixed"
         android:id="@+id/tablayout_organization"
-        app:tabTextColor="#fff"
+        app:tabTextColor="@color/secondaryTextColor"
         app:tabIndicatorColor="@color/secondaryColor"
-        android:background="@color/primaryDarkColor">
-    </com.google.android.material.tabs.TabLayout>
+        android:background="@color/transparent"/>
 
     <!--Page for Organization or list of services of Organization-->
     <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager_organization"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/viewpager_organization"/>
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

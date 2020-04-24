@@ -22,9 +22,6 @@ import com.cio.gidservice.models.UserProperties;
 import com.cio.gidservice.network.RetrofitClientInstance;
 import com.cio.gidservice.network.UserAPIManager;
 
-import java.io.IOException;
-
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -59,17 +56,13 @@ public class StartActivity extends AppCompatActivity {
                     } else {
                         //If user exists try confirm he on server part
                         UserAPIManager apiManager = RetrofitClientInstance.getRetrofitInstance().create(UserAPIManager.class);
-                        apiManager.login(user).enqueue(new Callback<ResponseBody>() {
+                        apiManager.login(user).enqueue(new Callback<Long>() {
                             //If user exists start activity as businessman user
                             @Override
-                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            public void onResponse(Call<Long> call, Response<Long> response) {
                                 if (response.isSuccessful()) {
                                     UserProperties.setIsAdmin(true);
-                                    try {
-                                        Toast.makeText(getApplicationContext(), "Query is successful" + (Long.valueOf(response.body().string()) == user.getId()), Toast.LENGTH_SHORT).show();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
+                                    Toast.makeText(getApplicationContext(), "Query is successful", Toast.LENGTH_SHORT).show();
                                 } else {
                                     UserProperties.setIsAdmin(false);
                                     Toast.makeText(getApplicationContext(), "Query is unsuccessful", Toast.LENGTH_SHORT).show();
@@ -79,7 +72,7 @@ public class StartActivity extends AppCompatActivity {
 
                             //If not exists start activity as simple user
                             @Override
-                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            public void onFailure(Call<Long> call, Throwable t) {
                                 UserProperties.setIsAdmin(false);
                                 ((SwipeRefreshLayout)findViewById(R.id.start_refreshing_swipe)).setRefreshing(false);
                                 Toast.makeText(getApplicationContext(), "Cannot resolve request to server!", Toast.LENGTH_SHORT).show();

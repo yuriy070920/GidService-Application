@@ -25,37 +25,35 @@ public class Organization implements Serializable {
     private Float rating;
     @SerializedName("imageUrl")
     private String imageUrl;
+    @SerializedName("lat")
+    private Double lat;
+    @SerializedName("lng")
+    private Double lng;
     @SerializedName("services")
     @Ignore
     private List<Service> services;
 
     public Organization() {
-        this(null, null, null, null, null);
+        this(null, null, null, null, null, null, null, null);
     }
 
-    public Organization(Long id, String name, String description, Float rating, String imageUrl, List<Service> services) {
+    public Organization(Long id, String name, String description, Float rating, String imageUrl, Double lat, Double lng, List<Service> services) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.rating = rating;
         this.imageUrl = imageUrl;
+        this.lat = lat;
+        this.lng = lng;
         this.services = services;
     }
 
-    public Organization(String name, String description, Float rating, List<Service> services, String imageUrl) {
-        this(++id_counter, name, description, rating, imageUrl, services);
+    public static Long getId_counter() {
+        return id_counter;
     }
 
-    @Override
-    public String toString() {
-        return "Organization{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", rating=" + rating +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", services=" + services +
-                '}';
+    public static void setId_counter(Long id_counter) {
+        Organization.id_counter = id_counter;
     }
 
     public Long getId() {
@@ -90,19 +88,35 @@ public class Organization implements Serializable {
         this.rating = rating;
     }
 
-    public List<Service> getServices() {
-        return services;
-    }
-
-    public void setServices(List<Service> services) {
-        this.services = services;
-    }
-
     public String getImageUrl() {
         return imageUrl;
     }
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLng() {
+        return lng;
+    }
+
+    public void setLng(Double lng) {
+        this.lng = lng;
+    }
+
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
     }
 }

@@ -1,8 +1,7 @@
 package com.cio.gidservice.fragments;
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -24,6 +23,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.cio.gidservice.R;
+import com.cio.gidservice.activities.MainActivity;
+import com.cio.gidservice.dialogs.UploadingDialog;
 import com.cio.gidservice.models.Service;
 import com.cio.gidservice.network.OrganizationAPIManager;
 import com.cio.gidservice.network.RetrofitClientInstance;
@@ -73,6 +74,7 @@ public class FirstAddServiceFragment extends Fragment {
 
         ImageView imageLoader = view.findViewById(R.id.service_image_input);
         imageLoader.setOnClickListener(v -> {
+            //If not have access to external storage
             if (ContextCompat.checkSelfPermission(getContext(),
                     Manifest.permission.READ_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
@@ -80,6 +82,7 @@ public class FirstAddServiceFragment extends Fragment {
                 ActivityCompat.requestPermissions(getActivity(),
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+            } else {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -88,13 +91,6 @@ public class FirstAddServiceFragment extends Fragment {
                         PICK_IMAGE_FROM_GALLERY_REQUEST
                 );
             }
-            Intent intent = new Intent();
-            intent.setType("image/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(
-                    Intent.createChooser(intent, "Select picture.."),
-                    PICK_IMAGE_FROM_GALLERY_REQUEST
-            );
         });
 
         ImageButton save = view.findViewById(R.id.save_service_but);
@@ -151,14 +147,19 @@ public class FirstAddServiceFragment extends Fragment {
 
     private void startUpload() {
 
-        ProgressDialog dialog = ProgressDialog.show(getContext(), "", "Uploading\nPlease wait...", true);
+        UploadingDialog dialog = new UploadingDialog(getActivity());
+        dialog.startLoading();
         Long orgId = getActivity().getIntent().getLongExtra("organization_id", 1);
 
         if(name_et.getText() == null ||
-                description_et.getText() == null ||
-                cost_et.getText() == null) {
-
+           description_et.getText() == null ||
+           cost_et.getText() == null) {
+            Toast.makeText(getContext(), "Not all fields are fill!", Toast.LENGTH_LONG).show();
             return;
+        } else {
+            System.out.println(name_et.getText().toString());
+            System.out.println(description_et.getText().toString());
+            System.out.println(cost_et.getText().toString());
         }
 
         service.setName(name_et.getText().toString());
@@ -170,8 +171,8 @@ public class FirstAddServiceFragment extends Fragment {
         OrganizationAPIManager apiManager = RetrofitClientInstance.getRetrofitInstance().create(OrganizationAPIManager.class);
 
         RequestBody name = RequestBody.create(MultipartBody.FORM, service.getName());
-        RequestBody description = RequestBody.create(MultipartBody.FORM, service.getName());
-        RequestBody cost = RequestBody.create(MultipartBody.FORM, service.getName());
+        RequestBody description = RequestBody.create(MultipartBody.FORM, service.getDescription());
+        RequestBody cost = RequestBody.create(MultipartBody.FORM, String.valueOf(service.getPrice()));
         File originalFile = FileUtils.getFile(getContext(), Uri.parse(service.getImageUrl()));
         RequestBody filePart = FormBody.create(
                 MediaType.parse(getContext().getContentResolver().getType(Uri.parse(service.getImageUrl()))),
@@ -183,23 +184,26 @@ public class FirstAddServiceFragment extends Fragment {
             public void onResponse(Call<Long> call, Response<Long> response) {
                 if(response.isSuccessful()){
                     Toast.makeText(getContext(), "Service successfully added!", Toast.LENGTH_LONG).show();
-                    refreshLayout.setRefreshing(false);
+                    finishUpload(dialog);
                 }
                 else{
                     Toast.makeText(getContext(), "Service cannot be added!", Toast.LENGTH_LONG).show();
-                    refreshLayout.setRefreshing(false);
+                    dialog.dismiss();
                 }
             }
 
             @Override
             public void onFailure(Call<Long> call, Throwable t) {
                 Toast.makeText(getContext(), "Check your internet connection!", Toast.LENGTH_LONG).show();
-                refreshLayout.setRefreshing(false);
+                dialog.dismiss();
             }
         });
     }
 
-    private void finishUpload(AlertDialog dialog) {
+    private void finishUpload(Dialog dialog) {
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         dialog.dismiss();
+        startActivity(intent);
     }
 }

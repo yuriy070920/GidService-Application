@@ -1,19 +1,18 @@
 package com.cio.gidservice.activities;
 
-import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -61,19 +60,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_layout1);
 
-        checkPermossions();;
-
         ((SwipeRefreshLayout)findViewById(R.id.refreshLayout)).setRefreshing(true);
 
         settingUpNavigationMenu();
 
         settingUpRefreshLayout();
 
-    }
-
-    private void checkPermossions() {
-        ActivityCompat.requestPermissions(MainActivity.this,
-                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
     }
 
     private void settingUpRefreshLayout() {
@@ -97,8 +89,6 @@ public class MainActivity extends AppCompatActivity {
         drawLay.addDrawerListener(drawTog);
         drawTog.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.menu_icon);
         //getSupport
         navView = findViewById(R.id.navigation_view);
         System.out.println(UserProperties.isAdmin());
@@ -161,6 +151,13 @@ public class MainActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     Log.d(TAG, "onResponse: " + response.body().size());
                     organizations = response.body();
+
+                    if(organizations == null || organizations.size() == 0)
+                        createResponseText(getString(R.string.no_data) + "\nSwipe to refresh");
+                    else
+                        createResponseText("");
+
+
                     orgDB.clear();
                     for (Organization organization: organizations) {
                         orgDB.insert(organization);
@@ -190,6 +187,8 @@ public class MainActivity extends AppCompatActivity {
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setAdapter(adapter);
                     refreshLayout.setRefreshing(false);
+                } else {
+                    createResponseText(getString(R.string.no_data));
                 }
             }
 
@@ -197,7 +196,13 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<List<Organization>> call, Throwable t) {
                 organizations = orgDB.getAll();
                 refreshLayout.setRefreshing(false);
+                createResponseText(getString(R.string.no_connection) + "Try to swipe to refresh");
             }
         });
+    }
+
+    private void createResponseText(String text) {
+        TextView view = findViewById(R.id.failure_text);
+        view.setText(text);
     }
 }

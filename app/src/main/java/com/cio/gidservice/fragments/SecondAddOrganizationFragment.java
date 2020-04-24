@@ -1,16 +1,19 @@
 package com.cio.gidservice.fragments;
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,20 +26,20 @@ import com.cio.gidservice.R;
 import com.cio.gidservice.activities.MainActivity;
 import com.cio.gidservice.dao.App;
 import com.cio.gidservice.dao.UserDao;
+import com.cio.gidservice.dialogs.UploadingDialog;
 import com.cio.gidservice.models.Organization;
 import com.cio.gidservice.models.User;
 import com.cio.gidservice.network.OrganizationAPIManager;
 import com.cio.gidservice.network.RetrofitClientInstance;
 import com.cio.gidservice.utils.FileUtils;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.GsonBuilder;
+import com.mapbox.android.core.permissions.PermissionsManager;
+import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.maps.MapView;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 import java.io.File;
 import java.util.List;
@@ -58,13 +61,15 @@ public class SecondAddOrganizationFragment extends Fragment implements OnMapRead
 
     private Organization organization;
     private MapView mapView;
-    private boolean mLocationPermissionGranted;
-    private GoogleMap mMap;
-    private MapView mMapView;
+    private MapboxMap mapboxMap;
+    private Button selectLocationButton;
+    private PermissionsManager permissionsManager;
+    private ImageView hoveringMarker;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Mapbox.getInstance(getContext(), getString(R.string.access_token));
         view = inflater.inflate(R.layout.add_organization_second_fragment, container, false);
         if (ContextCompat.checkSelfPermission(getContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -73,31 +78,11 @@ public class SecondAddOrganizationFragment extends Fragment implements OnMapRead
             ActivityCompat.requestPermissions(getActivity(),
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
         }
-        mMapView = view.findViewById(R.id.mapView);
-        mMapView.onCreate(savedInstanceState);
 
-        mMapView.onResume(); // needed to get the map to display immediately
+        mapView = view.findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(this);
 
-        try {
-            MapsInitializer.initialize(getActivity().getApplicationContext());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        mMapView.getMapAsync(Map -> {
-            mMap = Map;
-
-            // For showing a move to my location button
-            mMap.setMyLocationEnabled(true);
-
-            // For dropping a marker at a point on the Map
-            LatLng sydney = new LatLng(-34, 151);
-            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
-
-            // For zooming automatically to the location of the marker
-            CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
-            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-        });
         return view;
     }
 
@@ -108,27 +93,26 @@ public class SecondAddOrganizationFragment extends Fragment implements OnMapRead
 
         System.out.println(organization.getDescription());
 
-        ImageButton createOrganization = view.findViewById(R.id.finish_button);
+        Button createOrganization = view.findViewById(R.id.finish_button);
         createOrganization.setOnClickListener(v -> {
-            addOrganization(organization, Uri.parse(organization.getImageUrl()));
+            LatLng latLng = mapboxMap.getCameraPosition().target;
+            addOrganization(organization, Uri.parse(organization.getImageUrl()), latLng);
         });
     }
 
-    public void requestRead() {
-        Uri uri = Uri.parse(organization.getImageUrl());
-        if (ContextCompat.checkSelfPermission(getContext(),
-                Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
-        } else {
-            addOrganization(organization, uri);
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                getParentFragmentManager().beginTransaction().replace(R.id.add_organization_frame, new FirstAddOrganizationFragment(getContext(), organization));
+                return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
-    private void addOrganization(Organization organization, Uri uri) {
-        ProgressDialog dialog = ProgressDialog.show(getContext(), "", "Uploading.\nPlease wait...", true);
+    private void addOrganization(Organization organization, Uri uri, LatLng latLng) {
+        UploadingDialog dialog = new UploadingDialog(getActivity());
+        dialog.startLoading();
         UserDao userDao = App.getInstance().getDatabase().userDao();
         User user = userDao.getUser();
         OrganizationAPIManager apiManager = RetrofitClientInstance.getRetrofitInstance().create(OrganizationAPIManager.class);
@@ -140,26 +124,23 @@ public class SecondAddOrganizationFragment extends Fragment implements OnMapRead
         MultipartBody.Part file = MultipartBody.Part.createFormData("photo", originalFile.getName(), filePart);
         RequestBody name = RequestBody.create(MultipartBody.FORM, organization.getName());
         RequestBody description = RequestBody.create(MultipartBody.FORM, organization.getDescription());
-        apiManager.addOrganization(user.getId(), file, name, description).enqueue(new Callback<List<Organization>>() {
+        apiManager.addOrganization(user.getId(), file, name, description, latLng.getLatitude(), latLng.getLongitude()).enqueue(new Callback<List<Organization>>() {
             @Override
             public void onResponse(Call<List<Organization>> call, Response<List<Organization>> response) {
                 if (response.isSuccessful()) {
                     endRequest(dialog);
                 } else {
-                    System.out.println(TAG + response.raw().code() + response.raw().body().toString());
-                    Toast.makeText(getContext(), "Some", Toast.LENGTH_LONG).show();
-                    endRequest(dialog);
+                    Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG).show();
+                    dialog.dismiss();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Organization>> call, Throwable t) {
-                if(call.isExecuted()) {
+                if(!call.isCanceled())
                     endRequest(dialog);
-                }else {
-                    Toast.makeText(getLayoutInflater().getContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                    dialog.dismiss();
-                }
+                Toast.makeText(getLayoutInflater().getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                dialog.dismiss();
             }
         });
     }
@@ -176,7 +157,7 @@ public class SecondAddOrganizationFragment extends Fragment implements OnMapRead
         }
     }
 
-    private void endRequest(AlertDialog dialogFragment) {
+    private void endRequest(Dialog dialogFragment) {
         dialogFragment.dismiss();
         Toast.makeText(getContext(), "Organization successfully added!", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
@@ -185,41 +166,73 @@ public class SecondAddOrganizationFragment extends Fragment implements OnMapRead
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mMapView.onResume();
+    @SuppressWarnings( {"MissingPermission"})
+    public void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        mapView.onStop();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mMapView.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mMapView.onDestroy();
+        mapView.onDestroy();
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        mMapView.onLowMemory();
+        mapView.onLowMemory();
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+    public void onMapReady(@NonNull final MapboxMap mapboxMap) {
+        this.mapboxMap = mapboxMap;
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
+            // When user is still picking a location, we hover a marker above the mapboxMap in the center.
+            // This is done by using an image view with the default marker found in the SDK. You can
+            // swap out for your own marker image, just make sure it matches up with the dropped marker.
+            hoveringMarker = new ImageView(getContext());
+            hoveringMarker.setImageResource(R.drawable.red_marker);
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
+            hoveringMarker.setLayoutParams(params);
+            mapView.addView(hoveringMarker);
 
-        // Add a marker in Sydney, Australia, and move the camera.
-        LatLng sydney = new LatLng(0, 0);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            // Button for user to drop marker or to pick marker back up.
+            selectLocationButton = view.findViewById(R.id.finish_button);
+            selectLocationButton.setOnClickListener(view -> {
+                final LatLng mapTargetLatLng = mapboxMap.getCameraPosition().target;
+                Toast.makeText(getContext(), mapTargetLatLng.toString(), Toast.LENGTH_LONG).show();
+                // Use the map camera target's coordinates to make a reverse geocoding search
+                addOrganization(organization, Uri.parse(organization.getImageUrl()), mapTargetLatLng);
+            });
+        });
     }
+
 }

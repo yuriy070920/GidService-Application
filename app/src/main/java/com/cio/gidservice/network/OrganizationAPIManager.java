@@ -30,7 +30,9 @@ public interface OrganizationAPIManager {
             @Path("user_id") Long id,
             @Part MultipartBody.Part photo,
             @Part("name") RequestBody name,
-            @Part("description") RequestBody description
+            @Part("description") RequestBody description,
+            @Part("lat") Double lat,
+            @Part("lng") Double lng
     );
 
     @Multipart

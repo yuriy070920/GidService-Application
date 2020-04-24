@@ -21,6 +21,7 @@ import com.cio.gidservice.dao.App;
 import com.cio.gidservice.dao.AppDatabase;
 import com.cio.gidservice.dao.OrganizationDao;
 import com.cio.gidservice.models.Organization;
+import com.cio.gidservice.models.UserProperties;
 import com.cio.gidservice.network.OrganizationAPIManager;
 import com.cio.gidservice.network.RetrofitClientInstance;
 import com.google.android.material.navigation.NavigationView;
@@ -73,7 +74,8 @@ public class ManageActivity extends AppCompatActivity {
         OrganizationDao orgDB = db.organizationDao();
 
         OrganizationAPIManager apiManager = RetrofitClientInstance.getRetrofitInstance().create(OrganizationAPIManager.class);
-        apiManager.getOrganizationList().enqueue(new Callback<List<Organization>>() {
+        System.out.println(UserProperties.getUser().getId());
+        apiManager.getOrganizationList(UserProperties.getUser().getId()).enqueue(new Callback<List<Organization>>() {
             @Override
             public void onResponse(Call<List<Organization>> call, Response<List<Organization>> response) {
                 if(response.isSuccessful()){
