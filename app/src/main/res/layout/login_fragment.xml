@@ -26,6 +26,8 @@
         android:layout_marginTop="35sp"
         android:background="@drawable/registration_input_filed"
         android:gravity="center"
+        android:inputType="text"
+        android:imeOptions="actionNext"
         android:hint="Phone or E-mail" />
 
     <EditText
@@ -36,7 +38,8 @@
         android:background="@drawable/registration_input_filed"
         android:gravity="center"
         android:hint="Password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:imeOptions="actionDone"/>
 
     <TextView
         android:id="@+id/open_register_button"

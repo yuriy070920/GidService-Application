@@ -2,7 +2,6 @@ package com.cio.gidservice.activities;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -35,7 +34,7 @@ import retrofit2.Response;
 
 public class ManageActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "ManageActivity";
     private OrganizationCustomAdapter adapter;
     private RecyclerView recyclerView;
     private DrawerLayout drawLay;
@@ -74,12 +73,10 @@ public class ManageActivity extends AppCompatActivity {
         OrganizationDao orgDB = db.organizationDao();
 
         OrganizationAPIManager apiManager = RetrofitClientInstance.getRetrofitInstance().create(OrganizationAPIManager.class);
-        System.out.println(UserProperties.getUser().getId());
         apiManager.getOrganizationList(UserProperties.getUser().getId()).enqueue(new Callback<List<Organization>>() {
             @Override
             public void onResponse(Call<List<Organization>> call, Response<List<Organization>> response) {
                 if(response.isSuccessful()){
-                    Log.d(TAG, "onResponse: " + response.body().size());
                     organizations = response.body();
                     orgDB.clear();
                     for (Organization organization: organizations) {

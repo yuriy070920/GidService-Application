@@ -19,7 +19,7 @@ public class UploadingDialog extends Dialog {
     }
 
     public void startLoading() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.CustomAlertDialog);
 
         LayoutInflater inflater = activity.getLayoutInflater();
         builder.setView(inflater.inflate(R.layout.custom_progress, null));
@@ -29,7 +29,7 @@ public class UploadingDialog extends Dialog {
         dialog.show();
     }
     public void startLoading(String text) {
-        TextView view = findViewById(R.id.progress_message);
+        TextView view = dialog.findViewById(R.id.progress_message);
         view.setText(text);
         startLoading();
     }

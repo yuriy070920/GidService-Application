@@ -62,6 +62,7 @@ public class StartActivity extends AppCompatActivity {
                             public void onResponse(Call<Long> call, Response<Long> response) {
                                 if (response.isSuccessful()) {
                                     UserProperties.setIsAdmin(true);
+                                    UserProperties.getUser().setId(response.body());
                                     Toast.makeText(getApplicationContext(), "Query is successful", Toast.LENGTH_SHORT).show();
                                 } else {
                                     UserProperties.setIsAdmin(false);

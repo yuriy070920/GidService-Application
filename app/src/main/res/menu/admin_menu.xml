@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-   tools:showIn="@layout/test_layout1">
+   tools:showIn="@layout/main_layout">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single"
+        android:menuCategory="container">
+
+        <item
+            android:id="@+id/home_page"
+            android:icon="@drawable/ic_homepage"
+            android:title="Home"/>
+
         <item
             android:id="@+id/nav_search"
             android:icon="@drawable/ic_magnifier"
             android:title="Search"
             />
+
+    </group>
+
+    <group android:checkableBehavior="single"
+        android:menuCategory="container">
         <item
             android:id="@+id/nav_management"
             android:icon="@drawable/ic_management"

@@ -72,7 +72,7 @@ dependencies {
 
 
 //    package for google autocomplete
-    implementation ('com.mapbox.mapboxsdk:mapbox-android-sdk:9.1.0@aar'){
+    implementation ('com.mapbox.mapboxsdk:mapbox-android-sdk:9.1.0@aar') {
         transitive=true
     }
 

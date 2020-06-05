@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,18 +39,12 @@ public class AddOrganizationActivity extends AppCompatActivity implements OnMapR
     private static final int MY_PERMISSIONS_REQUEST = 100;
     private static final int PICK_IMAGE_FROM_GALLERY_REQUEST = 1;
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
-    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
-
-    EditText name_et;
-    EditText description_et;
-    EditText imageUrl_et;
 
     private GoogleMap mMap;
 
     FragmentManager fragmentManager;
 
     private static Organization organization;
-    private boolean mLocationPermissionGranted;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

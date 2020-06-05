@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test_layout1);
+        setContentView(R.layout.main_layout);
 
         ((SwipeRefreshLayout)findViewById(R.id.refreshLayout)).setRefreshing(true);
 
@@ -66,6 +68,13 @@ public class MainActivity extends AppCompatActivity {
 
         settingUpRefreshLayout();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.action_menu, menu);
+        return true;
     }
 
     private void settingUpRefreshLayout() {
@@ -101,14 +110,17 @@ public class MainActivity extends AppCompatActivity {
             int id = item.getItemId();
             switch(id) {
                 case R.id.nav_search:
+                case R.id.simple_search_icon:
                     Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show();
-                    /*Intent intent = new Intent(this, AddOrganizationActivity.class);
-                    startActivity(intent);*/
+                    Intent intent = new Intent(this, FindActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                     break;
                 case R.id.nav_management:
                     Toast.makeText(this, "Management", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(this, ManagementActivity.class);
-                    startActivity(intent);
+                    Intent intent1 = new Intent(this, ManagementActivity.class);
+                    intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    startActivity(intent1);
                     break;
                 case R.id.login_admin:
                     Toast.makeText(this, "Login", Toast.LENGTH_SHORT).show();
@@ -126,6 +138,8 @@ public class MainActivity extends AppCompatActivity {
                     intent3.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent3);
                     break;
+                case R.id.home_page:
+                    return true;
             }
             return true;
         });
@@ -133,6 +147,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.action_find:
+                Intent intent = new Intent(this, FindActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                break;
+        }
         if(drawTog.onOptionsItemSelected(item)){
             return true;
         }
@@ -196,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<List<Organization>> call, Throwable t) {
                 organizations = orgDB.getAll();
                 refreshLayout.setRefreshing(false);
-                createResponseText(getString(R.string.no_connection) + "Try to swipe to refresh");
+                createResponseText(getString(R.string.no_connection) + "\nTry to swipe to refresh");
             }
         });
     }

@@ -8,7 +8,6 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -31,17 +30,13 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
         <meta-data android:name="OnlineMaps.Key" android:value="bAHQFI5kL3AReK1SuUtbGvesvK3GDzzQ"/>
         <meta-data android:name="OnlineSearch.Key" android:value="bAHQFI5kL3AReK1SuUtbGvesvK3GDzzQ"/>
         <meta-data android:name="OnlineRouting.Key" android:value="bAHQFI5kL3AReK1SuUtbGvesvK3GDzzQ"/>
-
-        <activity
-            android:name=".activities.MapsActivity"
-            android:label="@string/title_activity_maps"/>
         <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.TestActivity">
+
+        </activity>
         <activity android:name=".activities.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,8 +44,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.VerificationActivity" />
-        <activity android:name=".activities.EnterNameActivity" />
         <activity android:name=".activities.OrganizationActivity" />
         <activity android:name=".activities.ServiceActivity" />
         <activity android:name=".activities.AddOrganizationActivity" />
@@ -58,6 +51,10 @@
         <activity android:name=".activities.ManageActivity" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.ManagementActivity" />
+        <activity android:name=".activities.FindActivity" />
+        <activity android:name=".activities.DetailsSearchActivity" />
+        <activity android:name=".activities.DeletingServiceActivity" />
+        <activity android:name=".activities.DeletingOrganizationActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

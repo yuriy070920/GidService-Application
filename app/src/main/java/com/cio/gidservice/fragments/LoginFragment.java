@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -45,16 +46,25 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         ImageButton login = view.findViewById(R.id.login_next_button);
-        login.setOnClickListener(v -> {
-            EditText loginText = view.findViewById(R.id.phone_login_field);
-            EditText passText = view.findViewById(R.id.password_login_field);
-
-            String loginStr = loginText.getText().toString();
-            String passwdStr = passText.getText().toString();
-            addUser(loginStr, passwdStr);
+        login.setOnClickListener(v -> login());
+        EditText pass = view.findViewById(R.id.password_login_field);
+        pass.setOnEditorActionListener((v, actionId, event) -> {
+            if(actionId == EditorInfo.IME_ACTION_DONE){
+                login();
+                return true;
+            }
+            return false;
         });
+    }
+
+    private void login() {
+        EditText loginText = view.findViewById(R.id.phone_login_field);
+        EditText passText = view.findViewById(R.id.password_login_field);
+
+        String loginStr = loginText.getText().toString();
+        String passwdStr = passText.getText().toString();
+        addUser(loginStr, passwdStr);
     }
 
     private void addUser(String login, String pass) {

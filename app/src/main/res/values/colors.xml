@@ -6,12 +6,15 @@
     <color name="secondaryColor">#ff9400</color>
     <color name="secondaryLightColor">#fff861</color>
     <color name="secondaryDarkColor">#c79500</color>
+    <color name="tertiaryColor">#f91C1C</color>
+    <color name="tertiaryLightColor">#d45a5a</color>
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#000000</color>
-    <color name="background">#f9f9f9</color>
+    <color name="background">#f9f9f9</color>S
     <color name="backgroundLight">#33000000</color>
 
-    <color name="black_overlay">#66000000</color>
+    <color name="black_overlay">#88000000</color>
     <color name="transparent">#00000000</color>
     <color name="quantum_lightblue">#0F73C3</color>
+    <color name="lightGreen">#1DA754</color>
 </resources>

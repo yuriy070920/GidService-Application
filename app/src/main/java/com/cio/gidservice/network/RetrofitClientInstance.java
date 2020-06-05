@@ -10,6 +10,7 @@ public class RetrofitClientInstance {
 
     private static Retrofit retrofit = null;
     private static final String BASE_URL = "http://gidservice.herokuapp.com";
+//    private static final String BASE_URL = "http://10.0.2.2:8080";
 
     public static Retrofit getRetrofitInstance() {
         if(retrofit == null) {

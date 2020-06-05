@@ -15,8 +15,7 @@
         android:id="@+id/nav_header_imageView"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/ic_user"
-        />
+        android:src="@drawable/ic_user" />
 
     <TextView
         android:id="@+id/nav_header_textView"
@@ -30,4 +29,5 @@
         android:textColor="@color/secondaryTextColor"
         android:fontFamily="@font/segoeui_bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
 </LinearLayout>

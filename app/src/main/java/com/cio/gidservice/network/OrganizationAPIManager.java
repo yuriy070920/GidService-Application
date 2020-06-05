@@ -48,4 +48,7 @@ public interface OrganizationAPIManager {
     @GET("/organization/getServices")
     Call<List<Service>> getServices(@Query("org_id") Long orgID);
 
+    @GET("/organization/getAllService/{user_id}")
+    Call<List<Service>> getServiceForUser(@Path("user_id") Long id);
+
 }

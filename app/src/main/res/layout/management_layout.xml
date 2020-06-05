@@ -34,15 +34,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60sp"
-                android:fontFamily="@font/gilroy_light"
-                android:textColor="@color/secondaryTextColor"
+                android:fontFamily="@font/segoeui_semibold"
                 android:gravity="center"
                 android:text="@string/add_organization"
+                android:textColor="@color/secondaryTextColor"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@+id/add_organization_manage"
                 app:layout_constraintEnd_toEndOf="@+id/add_organization_manage"
                 app:layout_constraintStart_toStartOf="@+id/add_organization_manage"
-                app:layout_constraintTop_toTopOf="@+id/add_organization_manage" />
+                app:layout_constraintTop_toTopOf="@+id/add_organization_manage"
+                app:layout_constraintVertical_bias="0.609" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -66,7 +67,7 @@
                 android:text="@string/add_service"
                 android:layout_marginTop="35sp"
                 android:textSize="18sp"
-                android:fontFamily="@font/gilroy_light"
+                android:fontFamily="@font/segoeui_semibold"
                 android:textColor="@color/secondaryTextColor"
                 android:gravity="bottom"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -82,18 +83,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center"
-        android:visibility="invisible">
+        android:gravity="center">
         
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <ImageButton
-                android:id="@+id/view_organizations_btn"
+                android:id="@+id/deleteOrganizationBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/img_btn_view_companies"
+                android:background="@drawable/ic_delete_organization_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -104,15 +104,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@id/view_organizations_btn"
-                android:layout_alignEnd="@id/view_organizations_btn"
-                android:layout_alignBottom="@+id/view_organizations_btn"
+                android:layout_alignStart="@id/deleteOrganizationBtn"
+                android:layout_alignEnd="@id/deleteOrganizationBtn"
+                android:layout_alignBottom="@+id/deleteOrganizationBtn"
                 android:layout_marginBottom="20sp"
-                android:fontFamily="@font/gilroy_light"
-                android:text="@string/view_organizations"
+                android:fontFamily="@font/segoeui_semibold"
+                android:text="Delete organization"
                 android:textSize="18sp"
                 android:textAlignment="center"
-                android:textColor="@color/secondaryTextColor" />
+                android:textColor="@color/tertiaryLightColor"
+                android:textStyle="bold"/>
 
         </RelativeLayout>
 
@@ -122,22 +123,23 @@
             android:layout_marginStart="15sp">
 
             <ImageButton
-                android:id="@+id/view_services_btn"
+                android:id="@+id/deleteServiceBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/img_btn_view_services"/>
+                android:background="@drawable/ic_delete_service_icon"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/view_all_services"
+                android:text="Delete service"
                 android:textAlignment="center"
-                android:textColor="@color/secondaryTextColor"
-                android:fontFamily="@font/gilroy_light"
+                android:textColor="@color/tertiaryLightColor"
+                android:textStyle="bold"
+                android:fontFamily="@font/segoeui_semibold"
                 android:textSize="18sp"
-                android:layout_alignBottom="@id/view_services_btn"
-                android:layout_alignEnd="@id/view_services_btn"
-                android:layout_alignStart="@id/view_services_btn"
+                android:layout_alignBottom="@id/deleteServiceBtn"
+                android:layout_alignEnd="@id/deleteServiceBtn"
+                android:layout_alignStart="@id/deleteServiceBtn"
                 android:layout_marginBottom="20sp"/>
 
 

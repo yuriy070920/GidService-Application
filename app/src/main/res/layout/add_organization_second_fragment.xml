@@ -6,31 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".activities.AddOrganizationActivity">
 
-        <!--<EditText
-            android:layout_width="wrap_content"
-            android:layout_height="50sp"
-            android:layout_gravity="center"
-            android:background="@drawable/search_location_field"
-            android:fontFamily="@font/gilroy_light"
-            android:hint="@string/enter_address"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:paddingStart="50sp"
-            android:paddingEnd="30sp"
-            android:textSize="18sp"/>-->
-
-        <com.mapbox.mapboxsdk.maps.MapView
-            android:id="@+id/mapView"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <com.mapbox.mapboxsdk.maps.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"/>
 
             <TextView
                 android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30sp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="30dp"
+                android:layout_centerInParent="true"
                 android:fontFamily="@font/ubuntu_light"
+                android:gravity="center"
                 android:text="@string/choose_location"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -46,7 +43,8 @@
                 android:fontFamily="@font/ubuntu_light"
                 android:textStyle="bold"
                 android:layout_margin="20sp"
-                android:layout_gravity="bottom"/>
-        </com.mapbox.mapboxsdk.maps.MapView>
+                android:layout_alignParentBottom="true"/>
+
+        </RelativeLayout>
 
 </FrameLayout>
